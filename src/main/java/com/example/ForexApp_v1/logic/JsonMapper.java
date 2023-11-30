@@ -1,12 +1,11 @@
-package logic;
+package com.example.ForexApp_v1.logic;
 
-import model.CurrencyDTO;
-import model.RateDTO;
+import com.example.ForexApp_v1.model.CurrencyDTO;
+import com.example.ForexApp_v1.model.RateDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import model.Currency;
-import model.Transaction;
+import com.example.ForexApp_v1.model.Currency;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

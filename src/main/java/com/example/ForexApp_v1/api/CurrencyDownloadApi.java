@@ -1,4 +1,4 @@
-package api;
+package com.example.ForexApp_v1.api;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

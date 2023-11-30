@@ -1,4 +1,4 @@
-package model;
+package com.example.ForexApp_v1.model;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

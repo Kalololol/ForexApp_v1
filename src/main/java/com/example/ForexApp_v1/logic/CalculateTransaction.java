@@ -1,8 +1,8 @@
-package logic;
+package com.example.ForexApp_v1.logic;
 
-import api.CurrencyDownloadApi;
-import model.Currency;
-import model.Transaction;
+import com.example.ForexApp_v1.api.CurrencyDownloadApi;
+import com.example.ForexApp_v1.model.Currency;
+import com.example.ForexApp_v1.model.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

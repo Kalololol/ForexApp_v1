@@ -1,8 +1,8 @@
 package com.example.ForexApp_v1;
 
-import api.CurrencyDownloadApi;
-import logic.JsonMapper;
-import model.Currency;
+import com.example.ForexApp_v1.api.CurrencyDownloadApi;
+import com.example.ForexApp_v1.logic.JsonMapper;
+import com.example.ForexApp_v1.model.Currency;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

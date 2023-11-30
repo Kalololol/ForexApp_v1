@@ -1,7 +1,7 @@
 package com.example.ForexApp_v1;
 
-import logic.CalculateTransaction;
-import model.Transaction;
+import com.example.ForexApp_v1.logic.CalculateTransaction;
+import com.example.ForexApp_v1.model.Transaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

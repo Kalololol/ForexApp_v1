@@ -1,6 +1,6 @@
 package com.example.ForexApp_v1;
 
-import api.CurrencyDownloadApi;
+import com.example.ForexApp_v1.api.CurrencyDownloadApi;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

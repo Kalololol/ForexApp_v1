@@ -1,6 +1,6 @@
-package logic;
+package com.example.ForexApp_v1.logic;
 
-import model.Transaction;
+import com.example.ForexApp_v1.model.Transaction;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
