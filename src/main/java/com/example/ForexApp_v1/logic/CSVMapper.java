@@ -1,6 +1,8 @@
 package com.example.ForexApp_v1.logic;
 
 import com.example.ForexApp_v1.model.Transaction;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class CSVMapper {
 
     public List<Transaction> readingFromFile(String fileName){

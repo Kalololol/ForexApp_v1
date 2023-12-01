@@ -3,6 +3,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,7 +12,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Calendar;
 import java.util.Date;
-
+@Service
 public class CurrencyDownloadApi {
     private final HttpClient client = HttpClient.newBuilder().build();
     private final ObjectMapper objectMapper = new ObjectMapper();

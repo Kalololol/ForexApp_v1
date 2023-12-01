@@ -3,12 +3,13 @@ package com.example.ForexApp_v1.logic;
 import com.example.ForexApp_v1.api.CurrencyDownloadApi;
 import com.example.ForexApp_v1.model.Currency;
 import com.example.ForexApp_v1.model.Transaction;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class CalculateTransaction {
     private final CurrencyDownloadApi currencyDownloadApi = new CurrencyDownloadApi();
     private final JsonMapper jsonMapper = new JsonMapper();

@@ -1,8 +1,9 @@
 package com.example.ForexApp_v1.model;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.Date;
-
+@Entity
 public class Currency {
     private final LocalDate date;
     private final String code;
