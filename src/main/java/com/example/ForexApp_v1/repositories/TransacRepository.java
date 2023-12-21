@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class TransacRepository implements IRepository<Transac>{
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
-
+    @Override
     public void create(Transac transac) {
         Transaction transaction = null;
 
@@ -30,7 +30,7 @@ public class TransacRepository implements IRepository<Transac>{
             e.printStackTrace();
         }
     }
-
+    @Override
     public void edit(Transac transac) {
         Transaction transaction = null;
 
@@ -44,7 +44,7 @@ public class TransacRepository implements IRepository<Transac>{
             e.printStackTrace();
         }
     }
-
+    @Override
     public void delete(Transac transac) {
         Transaction transaction = null;
 
@@ -59,7 +59,7 @@ public class TransacRepository implements IRepository<Transac>{
 
         }
     }
-
+    @Override
     public Transac findById(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -68,7 +68,7 @@ public class TransacRepository implements IRepository<Transac>{
         transacQuery.select(root).where(cb.equal(root.get("id"), id));
         return session.createQuery(transacQuery).getSingleResultOrNull();
     }
-
+    @Override
     public List<Transac> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();

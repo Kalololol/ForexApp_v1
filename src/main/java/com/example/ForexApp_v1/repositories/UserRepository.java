@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public class UserRepository implements IRepository<User>{
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
-
+    @Override
     public void create(User user) {
         Transaction t = null;
         try {
@@ -30,7 +30,7 @@ public class UserRepository implements IRepository<User>{
             e.printStackTrace();
         }
     }
-
+    @Override
     public void edit(User user) {
         try {
             Session s = sessionFactory.openSession();
@@ -42,7 +42,7 @@ public class UserRepository implements IRepository<User>{
             e.printStackTrace();
         }
     }
-
+    @Override
     public void delete(User user) {
         Transaction transaction = null;
 
@@ -57,7 +57,7 @@ public class UserRepository implements IRepository<User>{
 
         }
     }
-
+    @Override
     public User findById(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -66,7 +66,6 @@ public class UserRepository implements IRepository<User>{
         userQuery.select(root).where(cb.equal(root.get("id"), id));
         return session.createQuery(userQuery).getSingleResultOrNull();
     }
-
     public User findUserByEmail(String email) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -74,7 +73,7 @@ public class UserRepository implements IRepository<User>{
         Root<User> root = userQuery.from(User.class);
         userQuery.select(root).where(cb.equal(root.get("email"), email));
         return session.createQuery(userQuery).getSingleResultOrNull();    }
-
+    @Override
     public List<User> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();

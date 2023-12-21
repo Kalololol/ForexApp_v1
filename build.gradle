@@ -54,6 +54,8 @@ dependencies {
 	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.4.0.Final'
 	implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.2.0-M1'
 	implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.0'
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
 }
 
 tasks.named('test') {

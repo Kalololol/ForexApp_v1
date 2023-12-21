@@ -1,9 +1,7 @@
 package com.example.ForexApp_v1.service;
 
-import com.example.ForexApp_v1.model.Currency;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.example.ForexApp_v1.repositories.ICurrencyRepository;
 
 import java.util.List;
 @Service

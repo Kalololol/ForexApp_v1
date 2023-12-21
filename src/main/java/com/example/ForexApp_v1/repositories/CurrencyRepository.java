@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public class CurrencyRepository implements IRepository<Currency> {
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
+    @Override
     public void create(Currency currency){
         Transaction transaction = null;
         try {
@@ -28,6 +29,7 @@ public class CurrencyRepository implements IRepository<Currency> {
             e.printStackTrace();
         }
     }
+    @Override
     public void edit(Currency currency) {
         Transaction transaction = null;
 
@@ -41,6 +43,7 @@ public class CurrencyRepository implements IRepository<Currency> {
             e.printStackTrace();
         }
     }
+    @Override
     public void delete(Currency currency){
         Transaction transaction = null;
 
@@ -55,6 +58,7 @@ public class CurrencyRepository implements IRepository<Currency> {
 
         }
     }
+    @Override
     public List<Currency> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
@@ -64,6 +68,7 @@ public class CurrencyRepository implements IRepository<Currency> {
         return session.createQuery(currencyQuery).getResultList();
     }
 
+    @Override
     public Currency findById(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
