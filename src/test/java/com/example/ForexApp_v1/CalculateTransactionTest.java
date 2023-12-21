@@ -1,7 +1,7 @@
 package com.example.ForexApp_v1;
 
 import com.example.ForexApp_v1.logic.CalculateTransaction;
-import com.example.ForexApp_v1.model.Transaction;
+import com.example.ForexApp_v1.model.Transac;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class CalculateTransactionTest {
     @Test
     public void manualCalculateWrongCodeTest(){
 
-        Transaction transaction = calculateTransaction.manualCalculate(10, "USDS", "2023-11-10");
+        Transac transaction = calculateTransaction.manualCalculate(10, "USDS", "2023-11-10");
 
 
         Assertions.assertNull(transaction.getValuePln());

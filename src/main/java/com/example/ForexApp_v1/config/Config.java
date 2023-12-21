@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Config {
-    @Autowired
-    public ObjectMapper objectMapper;
+//    @Autowired
+//    public ObjectMapper objectMapper;
 
-    void customizeObjectMapper(){
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-    }
+    //void customizeObjectMapper(){
+    //    objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//    }
 }

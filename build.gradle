@@ -17,6 +17,10 @@ configurations {
 	}
 }
 
+compileJava{
+	options.compilerArgs << '-parameters'
+}
+
 repositories {
 	mavenCentral()
 }
@@ -25,7 +29,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter:3.1.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
-	//implementation 'com.h2database:h2'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'javax.persistence:javax.persistence-api:2.2'
@@ -41,12 +44,16 @@ dependencies {
 	implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 	//implementation 'com.fasterxml:jackson-xml-databind:0.6.2'
 
-	implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '12.5.0.jre11-preview'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	//implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '12.5.0.jre11-preview'
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
 	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
 // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+
+	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.4.0.Final'
+	implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.2.0-M1'
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.0'
 }
 
 tasks.named('test') {

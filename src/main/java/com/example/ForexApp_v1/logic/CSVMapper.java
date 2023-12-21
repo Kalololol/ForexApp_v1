@@ -1,6 +1,6 @@
 package com.example.ForexApp_v1.logic;
 
-import com.example.ForexApp_v1.model.Transaction;
+import com.example.ForexApp_v1.model.Transac;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class CSVMapper {
 
-    public List<Transaction> readingFromFile(String fileName){
+    public List<Transac> readingFromFile(String fileName){
 
         Path file = Paths.get(fileName + ".csv");
         List<String> arrayFromFile = new ArrayList<String>();
-        List<Transaction> transactionArrayList = new ArrayList<>();
+        List<Transac> transactionArrayList = new ArrayList<>();
 
         try {
             arrayFromFile = (ArrayList<String>) Files.readAllLines(file);
@@ -28,7 +28,7 @@ public class CSVMapper {
                 LocalDate date = LocalDate.parse(lineFromArray[0], formatter);
                 double valueCurrency = Double.parseDouble(lineFromArray[2]);
 
-                transactionArrayList.add(new Transaction(date, lineFromArray[1], valueCurrency));
+                transactionArrayList.add(new Transac(date, lineFromArray[1], valueCurrency));
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

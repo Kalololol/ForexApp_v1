@@ -2,7 +2,7 @@ package com.example.ForexApp_v1.logic;
 
 import com.example.ForexApp_v1.api.CurrencyDownloadApi;
 import com.example.ForexApp_v1.model.Currency;
-import com.example.ForexApp_v1.model.Transaction;
+import com.example.ForexApp_v1.model.Transac;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,29 +13,29 @@ import java.util.List;
 public class CalculateTransaction {
     private final CurrencyDownloadApi currencyDownloadApi = new CurrencyDownloadApi();
     private final JsonMapper jsonMapper = new JsonMapper();
-    public Transaction manualCalculate(double valueTransaction, String codeCurrency, String dateTransaction){
+    public Transac manualCalculate(double valueTransaction, String codeCurrency, String dateTransaction){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(dateTransaction, formatter);
 
         Double valuePLN = convertCurrency(codeCurrency, dateTransaction);
 
         if(valuePLN ==  null || valuePLN ==  0.00) {
-            Transaction transaction =  new Transaction(date, codeCurrency, valueTransaction, 0.00, 0.00, false);;
+            Transac transaction =  new Transac(date, codeCurrency, valueTransaction, 0.00, 0.00, false);;
             return transaction;
         }
 
         double convertTransaction = valueTransaction * valuePLN;
-        return new Transaction(date, codeCurrency, valueTransaction, valuePLN, convertTransaction, true);
+        return new Transac(date, codeCurrency, valueTransaction, valuePLN, convertTransaction, true);
     }
 
-    public List<Transaction> transactionList(List<Transaction> transactionArrayList){
-        List<Transaction> result = new ArrayList<>();
-        for(Transaction transaction : transactionArrayList){
+    public List<Transac> transactionList(List<Transac> transactionArrayList){
+        List<Transac> result = new ArrayList<>();
+        for(Transac transaction : transactionArrayList){
             result.add(automaticCalculate(transaction));
         }
         return result;
     }
-    private Transaction automaticCalculate(Transaction transaction){
+    private Transac automaticCalculate(Transac transaction){
 
         String date = transaction.getDateTransaction().toString();
         Double valuePLN = convertCurrency(transaction.getCodeCurrency(), date);
@@ -63,9 +63,9 @@ public class CalculateTransaction {
         }
         return currency.getMid();
     }
-    public double percentageResult(List<Transaction> transactionArrayList){
+    public double percentageResult(List<Transac> transactionArrayList){
         int sum = 0;
-        for (Transaction transaction : transactionArrayList){
+        for (Transac transaction : transactionArrayList){
             if(transaction.getIsDone() == true){
                 sum++;
             }

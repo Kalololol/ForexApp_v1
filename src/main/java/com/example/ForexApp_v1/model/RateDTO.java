@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
 import java.util.Date;
-@Entity
+
 public class RateDTO {
 
     @JsonProperty("no")

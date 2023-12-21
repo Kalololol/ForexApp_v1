@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 @Entity
-public class Transaction {
+public class Transac {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,12 +17,12 @@ public class Transaction {
     private double resultTransaction;
     private boolean isDone;
 
-    public Transaction(LocalDate dateTransaction, String codeCurrency, double valueCurrency) {
+    public Transac(LocalDate dateTransaction, String codeCurrency, double valueCurrency) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
     }
-    public Transaction(LocalDate dateTransaction, String codeCurrency, double valueCurrency, double valuePln, double resultTransaction, boolean isDone) {
+    public Transac(LocalDate dateTransaction, String codeCurrency, double valueCurrency, double valuePln, double resultTransaction, boolean isDone) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
