@@ -1,12 +1,12 @@
 package com.example.ForexApp_v1.controller;
 
 import com.example.ForexApp_v1.model.Currency;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class CurrencyController {
     @GetMapping("/currencies")
     public List<Currency> getCurrencies(){
