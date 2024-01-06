@@ -14,7 +14,7 @@ import java.util.List;
 public class TransacRepository implements IRepository<Transac>{
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
     @Override
-    public void create(Transac transac) {
+    public void createOrUpdate(Transac transac) {
         Transaction transaction = null;
 
         try {
@@ -30,20 +30,20 @@ public class TransacRepository implements IRepository<Transac>{
             e.printStackTrace();
         }
     }
-    @Override
-    public void edit(Transac transac) {
-        Transaction transaction = null;
-
-        try {
-            Session s = sessionFactory.openSession();
-            Transaction t = s.beginTransaction();
-            s.merge(transac);
-            t.commit();
-            s.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void edit(Transac transac) {
+//        Transaction transaction = null;
+//
+//        try {
+//            Session s = sessionFactory.openSession();
+//            Transaction t = s.beginTransaction();
+//            s.merge(transac);
+//            t.commit();
+//            s.close();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
     @Override
     public void delete(Transac transac) {
         Transaction transaction = null;

@@ -15,7 +15,7 @@ import java.util.List;
 public class UserRepository implements IRepository<User>{
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
     @Override
-    public void create(User user) {
+    public void createOrUpdate(User user) {
         Transaction t = null;
         try {
             Session session = sessionFactory.openSession();
@@ -30,18 +30,18 @@ public class UserRepository implements IRepository<User>{
             e.printStackTrace();
         }
     }
-    @Override
-    public void edit(User user) {
-        try {
-            Session s = sessionFactory.openSession();
-            Transaction t = s.beginTransaction();
-            s.merge(user);
-            t.commit();
-            s.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void edit(User user) {
+//        try {
+//            Session s = sessionFactory.openSession();
+//            Transaction t = s.beginTransaction();
+//            s.merge(user);
+//            t.commit();
+//            s.close();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
     @Override
     public void delete(User user) {
         Transaction transaction = null;

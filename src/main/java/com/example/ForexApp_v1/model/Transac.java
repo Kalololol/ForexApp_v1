@@ -17,6 +17,7 @@ public class Transac {
     private double resultTransaction;
     private boolean isDone;
 
+    public Transac(){};
     public Transac(LocalDate dateTransaction, String codeCurrency, double valueCurrency) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
@@ -57,7 +58,9 @@ public class Transac {
     public void setDone(boolean done) {
         isDone = done;
     }
-
+    public long getId() {
+        return id;
+    }
     @Override
     public String toString() {
         return "Transaction{" +
@@ -69,4 +72,6 @@ public class Transac {
                 ", isDone=" + isDone +
                 '}';
     }
+
+
 }

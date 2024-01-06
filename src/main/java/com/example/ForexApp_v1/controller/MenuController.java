@@ -24,7 +24,7 @@ public class MenuController {
 //            return "security/register";
 //        }
             try {
-           userRepository.create(user);
+           userRepository.createOrUpdate(user);
        } catch (Exception e) {
 //           bindingResult.rejectValue("email", "customUser.email", "Podany adres email jest już w użyciu.");
 //           model.addAttribute("registrationForm", customUser);

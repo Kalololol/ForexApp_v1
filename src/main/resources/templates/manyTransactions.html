@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>ForexApp-Oblicz transakcje </title>
-<!--    <link rel="stylesheet" href="../static/styles.css">-->
     <link rel="stylesheet" type="text/css" href="/styles.css">
-
-
 </head>
 <body>
 <p>TEST many transactions TEST</p>
 <a>test</a>
+<ul>
+    <li th:each="transac : ${transacList}">
+        <span th:text="${transac.getId}"></span>
+        <span th:text="${transac.getDateTransaction}"></span>
+        <span th:text="${transac.getCodeCurrency}"></span>
+        <span th:text="${transac.getValueCurrency}"></span>
+        <span th:text="${transac.getValuePln}"></span>
+        <span th:text="${transac.getResultTransaction}"></span>
 
+        <!-- zastąp 'nazwaPola' nazwą pola w obiekcie Transac, które chcesz wyświetlić -->
+    </li>
+</ul>
 </body>
 </html>

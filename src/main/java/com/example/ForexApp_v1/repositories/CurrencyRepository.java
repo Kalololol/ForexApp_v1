@@ -14,7 +14,7 @@ import java.util.List;
 public class CurrencyRepository implements IRepository<Currency> {
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
     @Override
-    public void create(Currency currency){
+    public void createOrUpdate(Currency currency){
         Transaction transaction = null;
         try {
             Session session = sessionFactory.openSession();
@@ -29,20 +29,20 @@ public class CurrencyRepository implements IRepository<Currency> {
             e.printStackTrace();
         }
     }
-    @Override
-    public void edit(Currency currency) {
-        Transaction transaction = null;
-
-        try {
-            Session s = sessionFactory.openSession();
-            Transaction t = s.beginTransaction();
-            s.merge(currency);
-            t.commit();
-            s.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void edit(Currency currency) {
+//        Transaction transaction = null;
+//
+//        try {
+//            Session s = sessionFactory.openSession();
+//            Transaction t = s.beginTransaction();
+//            s.merge(currency);
+//            t.commit();
+//            s.close();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
     @Override
     public void delete(Currency currency){
         Transaction transaction = null;

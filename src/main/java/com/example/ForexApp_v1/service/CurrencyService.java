@@ -1,23 +1,28 @@
 package com.example.ForexApp_v1.service;
 
+import com.example.ForexApp_v1.model.Currency;
+import com.example.ForexApp_v1.repositories.CurrencyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 public class CurrencyService {
-//    private final ICurrencyRepository ICurrencyRepository;
-//    public List<Currency> findAllCurrency(){
-//        return ICurrencyRepository.findAll();
-//    }
-//    public Currency findCurrency(Long id){
-//        return ICurrencyRepository.getReferenceById(id);
-//    }
-//    public Currency updateCurrency(Currency currency){
-//        return ICurrencyRepository.saveAndFlush(currency);
-//    }
-//    public void deleteCurrency(Long id){
-//        ICurrencyRepository.deleteById(id);
-//    }
+    private final CurrencyRepository currencyRepository;
+    public CurrencyService(CurrencyRepository currencyRepository) {
+        this.currencyRepository = currencyRepository;
+    }
+    public List<Currency> findAllCurrency(){
+        return currencyRepository.findAll();
+    }
+    public Currency findCurrency(Long id){
+        return currencyRepository.findById(id);
+    }
+    public void createOrUpdateCurrency(Currency currency){
+        currencyRepository.createOrUpdate(currency);
+    }
+    public void deleteCurrency(Currency currency){
+        currencyRepository.delete(currency);
+    }
+
 }
