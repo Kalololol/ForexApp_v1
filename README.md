@@ -1,4 +1,6 @@
 # ForexApp_v1
+**Dodać walidacje dla daty - jeśli data jest przyszła występuje ostrzeżenie **
+
 Adnotacja @Component jest jednak bardzo ogólna i nie wskazuje roli, jaką pełni dana klasa. Z tego powodu najczęściej używa się jej specjalizacji w postaci adnotacji:
 
 @Service - klasy warstwy usług,
