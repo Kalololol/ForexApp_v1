@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>ForexApp-Formularz transakcji </title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<body>
+<form action="#" th:action="@{/singleTransaction}" th:object="${transacDTO}" method="post">
+
+    <label for="dateTransaction">Data:</label>
+    <input type="date" step="=1" id="dateTransaction" th:field="*{dateTransaction}" required><br><br>
+<!--    "datetime-local"-->
+    <label for="codeCurrency">Waluta:</label>
+    <select id="codeCurrency" th:field="*{codeCurrency}" required>
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+    </select><br><br>
+
+    <label for="valueCurrency">Wartość transakcji:</label>
+    <input type="number" step="0.0001" id="valueCurrency" th:field="*{valueCurrency}" required><br><br>
+
+    <button type="submit">Zatwierdź</button>
+<!--    Po dodaniu transakcji wyświetlamy wynik-->
+    <a></a>
+    <div th:if="${transac!= NULL}">
+        <table>
+            <tr>
+                <td>Identyfikator transakcji:</td>
+                <td th:text="${transac.getId()}"></td>
+            </tr>
+            <tr>
+                <td>Data transakcji:</td>
+                <td th:text="${transac.getDateTransaction()}"></td>
+            </tr>
+            <tr>
+                <td>Kod waluty:</td>
+                <td th:text="${transac.getCodeCurrency()}"></td>
+            </tr>
+            <tr>
+                <td>Kurs w PLN:</td>
+                <td th:text="${transac.getValuePln()}"></td>
+            </tr>
+            <tr>
+                <td>Wartość transakcji:</td>
+                <td th:text="${transac.getValueCurrency()}"></td>
+            </tr>
+            <tr>
+                <td>Przeliczenie transakcji:</td>
+                <td th:text="${transac.getResultTransaction()}"></td>
+            </tr>
+        </table>
+        <!--        <h1 th:text="${transac.getId()}"></h1>-->
+<!--        <h1 th:text="${transac.getDateTransaction()}"></h1>-->
+<!--        <h1 th:text="${transac.getCodeCurrency()}"></h1>-->
+<!--        <h1 th:text="${transac.getValueCurrency()}"></h1>-->
+<!--        <h1 th:text="${transac.getValuePln()}"></h1>-->
+<!--        <h1 th:text="${transac.getResultTransaction()}"></h1>-->
+    </div>
+    <div th:if="${transac == NULL}">
+    <button onclick="history.back()">Go back</button>
+    </div>
+    <div th:if="${transac != NULL}">
+        <button><a th:href="@{/}">Go back</a></button>
+    </div>
+
+</form>
+</body>
+</html>

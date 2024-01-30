@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ForexApp-Strona główna</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<body class="bodyCenter">
+<div class="containterCenter">
+        <div class="container">
+            <h1 class="bodyCenter">Witaj w aplikacji <span class="highlight">Forex-App</span></h1>
+        </div>
+        <form class="formCenter" action="/singleTransaction" method="get">
+            <button type="submit">Dodaj pojedynczą transakcje</button>
+        </form>
+
+        <form class="formCenter" action="/manyTransactions" method="get">
+            <button type="submit">Dodaj wiele transakcji</button>
+        </form>
+
+        <form class="formCenter" action="/readerFile" method="get">
+            <button type="submit">Wczytaj plik</button>
+        </form>
+</div>
+
+</body>
+</html>

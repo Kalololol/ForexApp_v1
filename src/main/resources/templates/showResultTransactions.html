@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ForexApp-Wszystkie transakcje</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<body>
+    <table>
+        <thead>
+        <tr>
+            <th>Identyfikator transkcji</th>
+            <th>Data transakcji</th>
+            <th>Kod waluty</th>
+            <th>Kurs w PLN</th>
+            <th>Wartość transakcji</th>
+            <th>Przeliczenie transakcji</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${resultTransacList.empty}">
+            <td colspan="2"> No Transactions Available </td>
+        </tr>
+        <tr th:each="transac : ${resultTransacList}">
+            <td><span th:text="${transac.getId()}"></span></td>
+            <td><span th:text="${transac.getDateTransaction()}"></span></td>
+            <td><span th:text="${transac.getCodeCurrency()}"></span></td>
+            <td><span th:text="${transac.getValuePln()}"></span></td>
+            <td><span th:text="${transac.getValueCurrency()}"></span></td>
+            <td><span th:text="${transac.getResultTransaction()}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <button><a th:href="@{/}"> Strona główna </a></button>
+
+
+</body>
+</html>
+
+
