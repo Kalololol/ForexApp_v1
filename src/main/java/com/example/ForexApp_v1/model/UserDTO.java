@@ -10,22 +10,42 @@ public class UserDTO {
     private String name;
     private String lastName;
     private String email;
-    private String password;
+    private String passwordHash;
 
     public UserDTO(){}
 
-    public UserDTO(Long id, String name, String lastName, String email, String password) {
+    public UserDTO(Long id, String name, String lastName, String email, String passwordHash) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
     }
 
-    public UserDTO(String name, String lastName, String email, String password) {
+    public UserDTO(String name, String lastName, String email, String passwordHash) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
     }
 }

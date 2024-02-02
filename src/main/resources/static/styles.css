@@ -18,3 +18,33 @@
         .formCenter {
             margin-bottom: 10px;
         }
+
+        body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #f4f4f4;
+                    display: flex;
+                }
+
+                nav {
+                    background-color: #333;
+                    padding: 20px;
+                    text-align: center;
+                    height: 100vh; /* Ustawia wysokość paska nawigacyjnego na 100% wysokości widoku */
+                    width: 200px; /* Ustawia szerokość paska nawigacyjnego */
+                    box-sizing: border-box;
+                }
+
+                nav a {
+                    display: block; /* Każdy link jest osobnym blokiem, co oznacza, że będą one wyświetlane jeden pod drugim */
+                    color: white;
+                    text-decoration: none;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                }
+
+                main {
+                    flex: 1; /* Pozostała przestrzeń zajmowana przez główną treść strony */
+                    padding: 20px;
+                }
