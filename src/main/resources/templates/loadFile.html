@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForexApp- wczytaj plik</title>
+
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body>
+
+<form action="#" th:action="@{/readerFile}" th:object="${file}" method="post" enctype="multipart/form-data">
+<div class="container">
+    <p>Wczytywanie pliku</p>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Należy dodać plik zawierający:</label>
+        <td><p>datę w formacie DD-mm-RRRR</p></td>
+        <td><p>walute USD albo EUR</p></td>
+        <td><p>Kwotę transakcji</p></td>
+        <input class="form-control" type="file" id="formFile" name="fileToUpload">
+
+    </div>
+    <button type="button" onclick="submitForm()">Zatwierdź</button>
+</div>
+</form>
+
+</body>
+
+</html>

@@ -27,6 +27,7 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter:3.1.5'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
@@ -34,7 +35,6 @@ dependencies {
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.6'
-	//implementation 'org.springframework.boot:spring-boot-starter-security:3.1.6'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.15.2'
@@ -58,6 +58,8 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.2.1'
+
+
 
 }
 

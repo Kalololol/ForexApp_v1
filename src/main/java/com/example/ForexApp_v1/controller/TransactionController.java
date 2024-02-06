@@ -2,12 +2,15 @@ package com.example.ForexApp_v1.controller;
 
 import com.example.ForexApp_v1.model.Transac;
 import com.example.ForexApp_v1.model.TransacDTO;
+import com.example.ForexApp_v1.model.UploadedFile;
 import com.example.ForexApp_v1.service.TransacService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +75,25 @@ public class TransactionController {
         }catch (Exception e){
             e.printStackTrace();
             return "index";
+        }
+    }
+
+    @GetMapping("/readerFile")
+    public String loadFile(Model model){
+
+        return "loadFile";
+    }
+    @PostMapping("/readerFile")
+    public String loadFile(@ModelAttribute UploadedFile uploadedFile) {
+        MultipartFile file = uploadedFile.getFile();
+
+        if (!file.isEmpty()) {
+            return "index"; //odczytać zawartość pliku,
+            //ustalić format pliku i jak go czytać
+            // czy lepiej do bazy zapisac plik a potem go w metodzie czytac ??
+
+        }else {
+            return "index"; //błąd jeśli plik jest pusty - wyswietlic komunikakt
         }
     }
 }

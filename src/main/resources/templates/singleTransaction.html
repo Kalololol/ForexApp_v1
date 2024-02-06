@@ -3,73 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>ForexApp-Formularz transakcji </title>
+
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/styles.css">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 12px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-        nav {
-                    background-color: #333;
-                    padding: 20px;
-                    text-align: center;
-                    height: 100vh; /* Ustawia wysokość paska nawigacyjnego na 100% wysokości widoku */
-                    width: 200px; /* Ustawia szerokość paska nawigacyjnego */
-                    box-sizing: border-box;
-                }
-
-                nav a {
-                    display: block; /* Każdy link jest osobnym blokiem, co oznacza, że będą one wyświetlane jeden pod drugim */
-                    color: white;
-                    text-decoration: none;
-                    padding: 10px;
-                    margin-bottom: 10px;
-                }
-    </style>
 
 </head>
 <body>
-
 <nav>
     <a href="#">Strona główna</a>
     <a href="#">O nas</a>
@@ -77,8 +16,11 @@
     <a href="#">Kontakt</a>
 </nav>
 <form action="#" th:action="@{/singleTransaction}" th:object="${transacDTO}" method="post">
-    <label for="dateTransaction">Data:</label>
-    <input type="date" step="1" id="dateTransaction" th:field="*{dateTransaction}" required><br>
+
+    <div class="mb-3">
+        <label for="dateTransaction" class="form-label">Data</label>
+        <input type="date" class="form-control" id="dateTransaction" th:field="*{dateTransaction}" required>
+    </div>
 
     <label for="codeCurrency">Waluta:</label>
     <select id="codeCurrency" th:field="*{codeCurrency}" required>
@@ -91,25 +33,6 @@
 
     <button type="submit">Zatwierdź</button>
 </form>
-
-<!--<form action="#" th:action="@{/singleTransaction}" th:object="${transacDTO}" method="post">-->
-
-<!--    <label for="dateTransaction">Data:</label>-->
-<!--    <input type="date" step="=1" id="dateTransaction" th:field="*{dateTransaction}" required><br><br>-->
-<!--&lt;!&ndash;    "datetime-local"&ndash;&gt;-->
-<!--    <label for="codeCurrency">Waluta:</label>-->
-<!--    <select id="codeCurrency" th:field="*{codeCurrency}" required>-->
-<!--        <option value="USD">USD</option>-->
-<!--        <option value="EUR">EUR</option>-->
-<!--    </select><br><br>-->
-
-<!--    <label for="valueCurrency">Wartość transakcji:</label>-->
-<!--    <input type="number" step="0.0001" id="valueCurrency" th:field="*{valueCurrency}" required><br><br>-->
-
-<!--    <button type="submit">Zatwierdź</button>-->
-<!--</form>-->
-
-<!--    Po dodaniu transakcji wyświetlamy wynik-->
     <a></a>
     <div th:if="${transac!= NULL}">
         <table>
@@ -144,6 +67,5 @@
     <div th:if="${transac != NULL}">
         <button><a th:href="@{/}">Go back</a></button>
     </div>
-
 </body>
 </html>

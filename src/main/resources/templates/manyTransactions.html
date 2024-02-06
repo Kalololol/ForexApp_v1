@@ -3,39 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ForexApp-Oblicz transakcje </title>
+    <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link rel="stylesheet" type="text/css" href="/styles.css">
-
-<!--    <style>-->
-<!--        body {-->
-<!--            font-family: Arial, sans-serif;-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            background-color: #f4f4f4;-->
-<!--            display: flex;-->
-<!--        }-->
-
-<!--        nav {-->
-<!--            background-color: #333;-->
-<!--            padding: 20px;-->
-<!--            text-align: center;-->
-<!--            height: 100vh; /* Ustawia wysokość paska nawigacyjnego na 100% wysokości widoku */-->
-<!--            width: 200px; /* Ustawia szerokość paska nawigacyjnego */-->
-<!--            box-sizing: border-box;-->
-<!--        }-->
-
-<!--        nav a {-->
-<!--            display: block; /* Każdy link jest osobnym blokiem, co oznacza, że będą one wyświetlane jeden pod drugim */-->
-<!--            color: white;-->
-<!--            text-decoration: none;-->
-<!--            padding: 10px;-->
-<!--            margin-bottom: 10px;-->
-<!--        }-->
-
-<!--        main {-->
-<!--            flex: 1; /* Pozostała przestrzeń zajmowana przez główną treść strony */-->
-<!--            padding: 20px;-->
-<!--        }-->
-<!--    </style>-->
 </head>
 <body>
 
@@ -66,9 +36,7 @@
     </table>
     <button type="submit" name="action" value="add"> DODAJ </button>
 </form>
-
 </main>
-
                 <table>
                     <thead>
                     <tr>
@@ -92,6 +60,5 @@
             <form method="post" th:action="@{/calculateTransactions}" th:object="${transacDTOList}">
             <button type="submit">OBLICZ</button>
         </form>
-<!--        <button><a th:href="@{/}"> Strona główna </a></button>-->
 </body>
 </html>
