@@ -10,16 +10,17 @@
 </head>
 <body>
 <nav>
-    <a href="#">Strona główna</a>
-    <a href="#">O nas</a>
-    <a href="#">Usługi</a>
-    <a href="#">Kontakt</a>
+    <a href="/">Strona główna</a>
+    <a href="/singleTransaction">Oblicz pojedynczą transakcje</a>
+    <a href="/manyTransactions">Oblicz wiele transakcji</a>
+    <a href="/readerFile">Wczytaj plik</a>
 </nav>
 <form action="#" th:action="@{/singleTransaction}" th:object="${transacDTO}" method="post">
 
     <div class="mb-3">
         <label for="dateTransaction" class="form-label">Data</label>
         <input type="date" class="form-control" id="dateTransaction" th:field="*{dateTransaction}" required>
+        <td th:if="${#fields.hasErrors('dateTransaction')}" th:errors="*{dateTransaction}">dateTransaction Error</td>
     </div>
 
     <label for="codeCurrency">Waluta:</label>
@@ -27,9 +28,12 @@
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
     </select><br>
+    <td th:if="${#fields.hasErrors('codeCurrency')}" th:errors="*{codeCurrency}">codeCurrency Error</td>
 
     <label for="valueCurrency">Wartość transakcji:</label>
     <input type="number" step="0.0001" id="valueCurrency" th:field="*{valueCurrency}" required><br>
+    <td th:if="${#fields.hasErrors('valueCurrency')}" th:errors="*{valueCurrency}">valueCurrency Error</td>
+
 
     <button type="submit">Zatwierdź</button>
 </form>
@@ -67,5 +71,6 @@
     <div th:if="${transac != NULL}">
         <button><a th:href="@{/}">Go back</a></button>
     </div>
+
 </body>
 </html>

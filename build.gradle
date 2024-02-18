@@ -59,6 +59,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '6.2.1'
 
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.2.2'
+// https://mvnrepository.com/artifact/org.hibernate/hibernate-validator
+	implementation group: 'org.hibernate', name: 'hibernate-validator', version: '8.0.1.Final'
 
 
 }

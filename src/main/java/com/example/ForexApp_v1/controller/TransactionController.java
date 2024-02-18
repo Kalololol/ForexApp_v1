@@ -4,17 +4,21 @@ import com.example.ForexApp_v1.model.Transac;
 import com.example.ForexApp_v1.model.TransacDTO;
 import com.example.ForexApp_v1.model.UploadedFile;
 import com.example.ForexApp_v1.service.TransacService;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
+@Validated
 public class TransactionController {
     private final TransacService transacService;
     private List<TransacDTO> transacDTOList = new ArrayList<>();
@@ -22,7 +26,20 @@ public class TransactionController {
         this.transacService = transacService;
     }
 
-    //adnotacja aby sprawdzać czy dane nie są puste bądź nullem ---np noEmpty
+    //w przypadku pojedynczego obiketu wykorzystać walidacje
+
+    //obiekt przejsiowy, ktory zawiera cutomowy walidator
+    // List<TransacDTO> transacList
+    // napisac swoj wlasny walidator
+
+
+    //if (bindingResult.hasErrors()) {
+    //			return "form";
+    //		}
+
+
+
+    //    //adnotacja aby sprawdzać czy dane nie są puste bądź nullem ---np noEmpty
     @GetMapping("/singleTransaction")
     public String showToSingleTransaction(Model model) {
         try {
@@ -33,17 +50,38 @@ public class TransactionController {
             return "index"; // wstawić stronę że błąd
         }
     }
+
     @PostMapping("/singleTransaction")
-    public String addToSingleTransaction(@ModelAttribute("transacDTO") TransacDTO transacDTO, Model model){
-      try {
+    public String addToSingleTransaction(@Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, Model model, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "singleTransaction";
+        }
+        try {
           Transac transac = transacService.addTransaction(transacDTO);
           model.addAttribute("transac", transac);
           return "singleTransaction";
-      }catch (Exception e){
+      }catch (ConstraintViolationException cve){
+            cve.printStackTrace();
+            return "index";
+        }
+        catch (Exception e){
           e.printStackTrace();
-          return "index";  // wstawić stronę że błąd
+          return "singleTransaction";  // wstawić stronę że błąd
       }
     }
+
+    //
+//    @PostMapping("/addValidatePhone")
+//    public String submitForm(@Valid ValidatedPhone validatedPhone,
+//      BindingResult result, Model m) {
+//        if(result.hasErrors()) {
+//            return "phoneHome";
+//        }
+//        m.addAttribute("message", "Successfully saved phone: "
+//          + validatedPhone.toString());
+//        return "phoneHome";
+//    }
+
     @GetMapping("/manyTransactions")
     public String addToManyTransactions(Model model){
 
@@ -54,7 +92,12 @@ public class TransactionController {
     }
 
     @PostMapping("/addTransactions")
-    public String showCreateFormTransactions(@ModelAttribute TransacDTO transacDTO){
+    public String showCreateFormTransactions(@Valid @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()) {
+
+            return "redirect:/manyTransactions";
+        }
         try {
             transacDTOList.add(transacDTO);
 
@@ -77,6 +120,37 @@ public class TransactionController {
             return "index";
         }
     }
+//     @PostMapping
+//    public String create(@Valid @ModelAttribute(name = "note") NoteModel note,
+//                         BindingResult bindingResult) {
+//        LOGGER.info("create(" + note + ")");
+//
+//        if (bindingResult.hasErrors()) {
+//            LOGGER.info("validation errors in Model: " + note);
+//            LOGGER.info("validation errors: " + bindingResult.getAllErrors());
+//            return "notes/create-note";
+//        }
+//
+//        notes.add(note);
+//        return "redirect:/notes";
+//    }
+//
+//    @PostMapping("/singleTransaction")
+//    ResponseEntity<String> addManyTransaction(@Valid @RequestBody List<TransacDTO> transacDTOList, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            StringBuilder errors = new StringBuilder();
+//            bindingResult.getFieldErrors().forEach(error ->
+//                    errors.append(error.getField()).append(": ").append(error.getDefaultMessage()).append("\n")
+//            );
+//            return ResponseEntity.badRequest().body(errors.toString());
+//        }
+//
+//        List<Transac> resultTransacList = transacService.addManyTransactions(transacDTOList);
+//        transacDTOList.clear();
+//
+//        return ResponseEntity.ok("User is valid");
+//
+//    }
 
     @GetMapping("/readerFile")
     public String loadFile(Model model){

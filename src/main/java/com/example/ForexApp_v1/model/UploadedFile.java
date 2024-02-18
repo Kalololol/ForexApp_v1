@@ -13,3 +13,9 @@ public class UploadedFile {
         this.file = file;
     }
 }
+
+// dodajemy plik do pliku rescources i css
+// dodawanie pliku wyłączyć ze spring security
+// plik xls -
+//
+//

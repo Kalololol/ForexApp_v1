@@ -10,7 +10,12 @@
 </head>
 
 <body>
-
+<nav>
+    <a href="/">Strona główna</a>
+    <a href="/singleTransaction">Oblicz pojedynczą transakcje</a>
+    <a href="/manyTransactions">Oblicz wiele transakcji</a>
+    <a href="/readerFile">Wczytaj plik</a>
+</nav>
 <form action="#" th:action="@{/readerFile}" th:object="${file}" method="post" enctype="multipart/form-data">
 <div class="container">
     <p>Wczytywanie pliku</p>
@@ -25,7 +30,6 @@
     <button type="button" onclick="submitForm()">Zatwierdź</button>
 </div>
 </form>
-
 </body>
 
 </html>

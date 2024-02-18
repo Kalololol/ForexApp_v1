@@ -1,26 +1,22 @@
 package com.example.ForexApp_v1.model;
 
+import com.example.ForexApp_v1.logic.TransacDTOConstraint;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
-import java.util.Date;
 
 public class TransacDTO {
 
-//    @NotEmpty -- string ,
-//    NotBlank -- dla string, sprawdza że nie ma pustych znaków
-//    NotNull sprawdza czy pole nie jest nullem
-    @NotEmpty
+    @NotEmpty(message = "Należy wprowadzić datę")
     @JsonProperty("date")
+    @TransacDTOConstraint
     private String dateTransaction;
-    @NotEmpty
+    @NotBlank(message = "Kod waluty nie został wybrany")
+    @TransacDTOConstraint
     private String codeCurrency;
-    @NotEmpty
+//    @NotBlank(message = "Należy podać wartość transakcji")
+    @DecimalMin(value = "0.0001", message = "Minimalna wartość transacji to 0.0001")
+//    @TransacDTOConstraint
     private double valueCurrency;
 
     public TransacDTO(){};
@@ -50,4 +46,12 @@ public class TransacDTO {
         this.dateTransaction = dateTransaction;
     }
 
+    @Override
+    public String toString() {
+        return "TransacDTO{" +
+                "dateTransaction='" + dateTransaction + '\'' +
+                ", codeCurrency='" + codeCurrency + '\'' +
+                ", valueCurrency=" + valueCurrency +
+                '}';
+    }
 }
