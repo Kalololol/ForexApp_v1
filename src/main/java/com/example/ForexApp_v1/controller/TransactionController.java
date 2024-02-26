@@ -25,21 +25,6 @@ public class TransactionController {
     public TransactionController(TransacService transacService) {
         this.transacService = transacService;
     }
-
-    //w przypadku pojedynczego obiketu wykorzystać walidacje
-
-    //obiekt przejsiowy, ktory zawiera cutomowy walidator
-    // List<TransacDTO> transacList
-    // napisac swoj wlasny walidator
-
-
-    //if (bindingResult.hasErrors()) {
-    //			return "form";
-    //		}
-
-
-
-    //adnotacja aby sprawdzać czy dane nie są puste bądź nullem ---np noEmpty
     @GetMapping("/singleTransaction")
     public String showToSingleTransaction(Model model) {
         try {
@@ -52,8 +37,7 @@ public class TransactionController {
     }
 
     @PostMapping("/singleTransaction")
-//    public String addToSingleTransaction(@Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, Model model, BindingResult bindingResult){
-        public String addToSingleTransaction( @ModelAttribute("transacDTO") TransacDTO transacDTO, Model model, BindingResult bindingResult){
+        public String addToSingleTransaction(@Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, Model model, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "singleTransaction";
         }
@@ -67,30 +51,32 @@ public class TransactionController {
         }
         catch (Exception e){
           e.printStackTrace();
-          return "singleTransaction";  // wstawić stronę że błąd
-      }
+            return "index"; // strona z błędem
+        }
     }
 
     @GetMapping("/manyTransactions")
     public String addToManyTransactions(Model model){
 
-        model.addAttribute("transacDTOList", transacDTOList);
-        model.addAttribute("newTransacDTO", new TransacDTO());
+        try {
+            model.addAttribute("transacDTOList", transacDTOList);
+            model.addAttribute("newTransacDTO", new TransacDTO());
 
-        return "manyTransactions";
+            return "manyTransactions";
+        }catch (Exception e){
+            return "index";
+        }
     }
 
     @PostMapping("/addTransactions")
     public String showCreateFormTransactions(@Valid @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
-
             return "index";
 //            return "redirect:/manyTransactions";
         }
         try {
             transacDTOList.add(transacDTO);
-
             return "redirect:/manyTransactions";
         }catch (Exception e){
             e.printStackTrace();

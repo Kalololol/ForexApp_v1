@@ -1,6 +1,5 @@
 package com.example.ForexApp_v1.model;
 
-import com.example.ForexApp_v1.logic.TransacDTOConstraint;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 
@@ -9,15 +8,12 @@ public class TransacDTO {
 
     @NotEmpty(message = "Należy wprowadzić datę")
     @JsonProperty("date")
-    @TransacDTOConstraint
+//    @TransacDTOConstraint
     private String dateTransaction;
-//    @NotBlank(message = "Kod waluty nie został wybrany")
-    @NotEmpty(message = "Kod waluty nie został wybrany")
-    @TransacDTOConstraint
+    @NotBlank(message = "Kod waluty nie został wybrany")
     private String codeCurrency;
     @NotNull(message = "Należy podać wartość transakcji")
     @DecimalMin(value = "0.0001", message = "Minimalna wartość transacji to 0.0001")
-    @TransacDTOConstraint
     private double valueCurrency;
 
     public TransacDTO(){};
