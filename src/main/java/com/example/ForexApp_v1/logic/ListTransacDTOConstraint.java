@@ -6,10 +6,10 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = TransacValidator.class)
+@Constraint(validatedBy = TransacListValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TransacDTOConstraint {
+public @interface ListTransacDTOConstraint {
     String message() default "Nieprawidłowa lista transakcji";
 
     Class<?>[] groups() default {};

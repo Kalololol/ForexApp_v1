@@ -1,23 +1,22 @@
 package com.example.ForexApp_v1.logic;
 
 import com.example.ForexApp_v1.model.TransacDTO;
+import com.example.ForexApp_v1.model.TransacDTOList;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import java.time.LocalDate;
-import java.util.List;
-public class TransacListValidator implements ConstraintValidator<TransacDTOConstraint, List<TransacDTO>> {
+
+public class TransacListValidator implements ConstraintValidator<ListTransacDTOConstraint, TransacDTOList> {
     @Override
-    public void initialize(TransacDTOConstraint transacDTO){
+    public void initialize(ListTransacDTOConstraint transacDTO){
     }
     @Override
-    public boolean isValid(List<TransacDTO> transacDTOList, ConstraintValidatorContext context) {
-        for(TransacDTO transacDTO : transacDTOList){
-            LocalDate todayDay = LocalDate.now();
+    public boolean isValid(TransacDTOList transacDTOList, ConstraintValidatorContext context) {
+        for(TransacDTO transacDTO : transacDTOList.getTransacDTOList()){
             LocalDate dateTransaction = LocalDate.parse(transacDTO.getDateTransaction());
             LocalDate dayMin = LocalDate.of(2022, 12, 31);
-            //transacDTO.getValueCurrency() != null ||
-            if( transacDTO.getCodeCurrency() != null ||  dateTransaction.isBefore(todayDay) || dateTransaction.isAfter(dayMin)){
+            if(Double.isNaN(transacDTO.getValueCurrency()) || transacDTO.getCodeCurrency() != null ||  dateTransaction.isBefore(LocalDate.now()) || dateTransaction.isAfter(dayMin)){
                 return false;
             }
         }

@@ -11,12 +11,13 @@ public class TransacDTO {
     @JsonProperty("date")
     @TransacDTOConstraint
     private String dateTransaction;
-    @NotBlank(message = "Kod waluty nie został wybrany")
+//    @NotBlank(message = "Kod waluty nie został wybrany")
+    @NotEmpty(message = "Kod waluty nie został wybrany")
     @TransacDTOConstraint
     private String codeCurrency;
-//    @NotBlank(message = "Należy podać wartość transakcji")
+    @NotNull(message = "Należy podać wartość transakcji")
     @DecimalMin(value = "0.0001", message = "Minimalna wartość transacji to 0.0001")
-//    @TransacDTOConstraint
+    @TransacDTOConstraint
     private double valueCurrency;
 
     public TransacDTO(){};
