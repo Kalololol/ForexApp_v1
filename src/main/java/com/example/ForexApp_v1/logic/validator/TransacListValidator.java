@@ -1,5 +1,6 @@
-package com.example.ForexApp_v1.logic;
+package com.example.ForexApp_v1.logic.validator;
 
+import com.example.ForexApp_v1.logic.validator.ListTransacDTOConstraint;
 import com.example.ForexApp_v1.model.TransacDTO;
 import com.example.ForexApp_v1.model.TransacDTOList;
 import jakarta.validation.ConstraintValidator;

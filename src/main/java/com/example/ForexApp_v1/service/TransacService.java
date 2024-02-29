@@ -10,6 +10,8 @@ import com.example.ForexApp_v1.repositories.TransacRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +29,16 @@ public class TransacService {
         this.jsonMapper = jsonMapper;
     }
 
-    public Transac addTransaction(TransacDTO transacDTO){
+    public TransacDTO addTransaction(TransacDTO transacDTO){
         Transac transac = calculateTransaction.manualCalculate(transacDTO.getValueCurrency(), transacDTO.getCodeCurrency(), (transacDTO.getDateTransaction().toString()).substring(0,10));
         transacRepository.createOrUpdate(transac);
-        return transac;
+
+        TransacDTO result = new TransacDTO(transac.getDateTransaction().toString(), transac.getCodeCurrency(), transac.getValueCurrency(), transac.getId(), transac.getValuePln(), transac.getResultTransaction(), transac.getIsDone());
+
+        return result;
     }
-    public List<Transac> addManyTransactions(List<TransacDTO> transacDTOList){
-        List<Transac> resultTransacList = new ArrayList<>();
+    public List<TransacDTO> addManyTransactions(List<TransacDTO> transacDTOList){
+        List<TransacDTO> resultTransacList = new ArrayList<>();
         for(TransacDTO transacDTO : transacDTOList){
             resultTransacList.add(addTransaction(transacDTO));
         }

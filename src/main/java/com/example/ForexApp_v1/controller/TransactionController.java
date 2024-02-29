@@ -32,7 +32,7 @@ public class TransactionController {
             return "singleTransaction";
         }catch (Exception e){
             e.printStackTrace();
-            return "index"; // wstawić stronę że błąd
+            return "singleTransaction";
         }
     }
 
@@ -42,16 +42,16 @@ public class TransactionController {
             return "singleTransaction";
         }
         try {
-          Transac transac = transacService.addTransaction(transacDTO);
+          TransacDTO transac = transacService.addTransaction(transacDTO);
           model.addAttribute("transac", transac);
           return "singleTransaction";
       }catch (ConstraintViolationException cve){
             cve.printStackTrace();
-            return "index";
+            return "singleTransaction";
         }
         catch (Exception e){
           e.printStackTrace();
-            return "index"; // strona z błędem
+            return "singleTransaction";
         }
     }
 
@@ -64,36 +64,35 @@ public class TransactionController {
 
             return "manyTransactions";
         }catch (Exception e){
-            return "index";
+            return "manyTransactions";
         }
     }
 
     @PostMapping("/addTransactions")
-    public String showCreateFormTransactions( @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
+    public String showCreateFormTransactions(@Valid @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
-            return "index";
-//            return "redirect:/manyTransactions";
+            return "manyTransactions";
         }
         try {
             transacDTOList.add(transacDTO);
             return "redirect:/manyTransactions";
         }catch (Exception e){
             e.printStackTrace();
-            return "index";
+            return "manyTransactions";
         }
     }
     @PostMapping("/calculateTransactions")
     public String showMultipleTransactions(Model model) {
         try {
-            List<Transac> resultTransacList = transacService.addManyTransactions(transacDTOList);
+            List<TransacDTO> resultTransacList = transacService.addManyTransactions(transacDTOList);
             transacDTOList.clear();
 
             model.addAttribute("resultTransacList", resultTransacList);
             return "showResultTransactions";
         }catch (Exception e){
             e.printStackTrace();
-            return "index";
+            return "calculateTransactions";
         }
     }
 

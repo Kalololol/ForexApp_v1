@@ -2,7 +2,7 @@ package com.example.ForexApp_v1.model;
 
 import java.util.List;
 
-import com.example.ForexApp_v1.logic.ListTransacDTOConstraint;
+import com.example.ForexApp_v1.logic.validator.ListTransacDTOConstraint;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 
