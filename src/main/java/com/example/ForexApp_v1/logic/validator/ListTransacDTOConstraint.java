@@ -11,8 +11,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ListTransacDTOConstraint {
     String message() default "Nieprawidłowa lista transakcji";
-
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }

@@ -37,7 +37,7 @@ public class TransactionController {
     }
 
     @PostMapping("/singleTransaction")
-        public String addToSingleTransaction(@Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, Model model, BindingResult bindingResult){
+        public String addToSingleTransaction(final @Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, final Model model, final BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "singleTransaction";
         }
@@ -56,12 +56,10 @@ public class TransactionController {
     }
 
     @GetMapping("/manyTransactions")
-    public String addToManyTransactions(Model model){
-
+    public String addToManyTransactions(final Model model){
         try {
             model.addAttribute("transacDTOList", transacDTOList);
             model.addAttribute("newTransacDTO", new TransacDTO());
-
             return "manyTransactions";
         }catch (Exception e){
             return "manyTransactions";
@@ -69,8 +67,7 @@ public class TransactionController {
     }
 
     @PostMapping("/addTransactions")
-    public String showCreateFormTransactions(@Valid @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
-
+    public String showCreateFormTransactions(final @ModelAttribute(name = "transacDTO") TransacDTO transacDTO, final BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "manyTransactions";
         }
@@ -82,12 +79,12 @@ public class TransactionController {
             return "manyTransactions";
         }
     }
+
     @PostMapping("/calculateTransactions")
-    public String showMultipleTransactions(Model model) {
+    public String showMultipleTransactions(final Model model) {
         try {
             List<TransacDTO> resultTransacList = transacService.addManyTransactions(transacDTOList);
             transacDTOList.clear();
-
             model.addAttribute("resultTransacList", resultTransacList);
             return "showResultTransactions";
         }catch (Exception e){
