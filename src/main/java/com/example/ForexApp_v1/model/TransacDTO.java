@@ -15,7 +15,7 @@ public class TransacDTO {
     private String codeCurrency;
     @NotNull(message = "Należy podać wartość transakcji")
     @DecimalMin(value = "0.0001", message = "Minimalna wartość transacji to 0.0001")
-    private double valueCurrency;
+    private Double valueCurrency;
     private long id;
     private Double valuePln;
     private Double resultTransaction;
@@ -24,13 +24,13 @@ public class TransacDTO {
 
     public TransacDTO(){};
 
-    public TransacDTO(String dateTransaction, String codeCurrency, double valueCurrency) {
+    public TransacDTO(String dateTransaction, String codeCurrency, Double valueCurrency) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
     }
 
-    public TransacDTO(String dateTransaction, String codeCurrency, double valueCurrency, long id, Double valuePln, Double resultTransaction, boolean isDone) {
+    public TransacDTO(String dateTransaction, String codeCurrency, Double valueCurrency, long id, Double valuePln, Double resultTransaction, boolean isDone) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
@@ -40,16 +40,21 @@ public class TransacDTO {
         this.isDone = isDone;
     }
 
+    public TransacDTO(String dateTransaction, String codeCurrency) {
+        this.dateTransaction = dateTransaction;
+        this.codeCurrency = codeCurrency;
+    }
+
     public String getCodeCurrency() {
         return codeCurrency;
     }
     public void setCodeCurrency(String codeCurrency) {
         this.codeCurrency = codeCurrency;
     }
-    public double getValueCurrency() {
+    public Double getValueCurrency() {
         return valueCurrency;
     }
-    public void setValueCurrency(double valueCurrency) {
+    public void setValueCurrency(Double valueCurrency) {
         this.valueCurrency = valueCurrency;
     }
     public String getDateTransaction() {

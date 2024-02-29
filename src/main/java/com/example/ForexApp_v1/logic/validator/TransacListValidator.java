@@ -17,7 +17,7 @@ public class TransacListValidator implements ConstraintValidator<ListTransacDTOC
         for(TransacDTO transacDTO : transacDTOList.getTransacDTOList()){
             LocalDate dateTransaction = LocalDate.parse(transacDTO.getDateTransaction());
             LocalDate dayMin = LocalDate.of(2022, 12, 31);
-            if(Double.isNaN(transacDTO.getValueCurrency()) || transacDTO.getCodeCurrency() != null ||  dateTransaction.isBefore(LocalDate.now()) || dateTransaction.isAfter(dayMin)){
+            if(transacDTO.getValueCurrency() == null || transacDTO.getCodeCurrency() == null ||  dateTransaction.isAfter(LocalDate.now()) || dateTransaction.isBefore(dayMin)){
                 return false;
             }
         }
