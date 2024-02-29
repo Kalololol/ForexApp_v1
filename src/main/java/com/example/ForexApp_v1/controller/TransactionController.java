@@ -69,7 +69,7 @@ public class TransactionController {
     }
 
     @PostMapping("/addTransactions")
-    public String showCreateFormTransactions(@Valid @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
+    public String showCreateFormTransactions( @ModelAttribute(name = "transacDTO") TransacDTO transacDTO,  BindingResult bindingResult){
 
         if (bindingResult.hasErrors()) {
             return "index";

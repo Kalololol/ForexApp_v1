@@ -30,8 +30,11 @@
                 </select><br><br>
             </td>
             <td>
-                <input type="number" step="0.0001" id="valueCurrency" th:field="*{valueCurrency}" required><br><br>
-            </td>
+                <input type="number" step="0.0001" min="0.0001" id="valueCurrency" th:field="*{valueCurrency}"  th:errorclass="is-invalid" required><br>
+                <td th:if="${#fields.hasErrors('valueCurrency')}" th:errors="*{valueCurrency}">valueCurrency Error</td>
+
+
+        </td>
         </tr>
     </table>
     <button type="submit" name="action" value="add"> DODAJ </button>
