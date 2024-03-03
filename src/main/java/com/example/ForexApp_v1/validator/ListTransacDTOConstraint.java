@@ -1,4 +1,4 @@
-package com.example.ForexApp_v1.logic.validator;
+package com.example.ForexApp_v1.validator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

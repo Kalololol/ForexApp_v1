@@ -10,6 +10,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 @Service
@@ -18,19 +21,20 @@ public class CurrencyDownloadApi {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public String getCurrencyExchangeRate(String code, String courseDay) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date;
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date;
         try {
-            date = dateFormat.parse(courseDay);
-        } catch (ParseException e) {
+            date = LocalDate.parse(courseDay, dateFormat);
+            return ExchangeRateDownload(code, date);
+
+        } catch (DateTimeParseException | IllegalArgumentException e) {
             e.printStackTrace();
             return null;
         }
-        return ExchangeRateDownload(code, date);
     }
-    private String ExchangeRateDownload(String code, Date day){
+    private String ExchangeRateDownload(String code, LocalDate day){
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = dateFormat.format(day);
         HttpResponse<String> response;
         String codeLowerCase = code.toLowerCase();
@@ -46,11 +50,14 @@ public class CurrencyDownloadApi {
                         .build();
                 response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 if(response.statusCode() == 404){
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(day);
-                    calendar.add(Calendar.DAY_OF_YEAR, -1);
-                    day = calendar.getTime();
-                    formattedDate = dateFormat.format(day);
+                    LocalDate dateMinus = day.minusDays(1);
+                    formattedDate = dateFormat.format(dateMinus);
+//
+//                    Calendar calendar = Calendar.getInstance();
+//                    calendar.setTime(day);
+//                    calendar.add(Calendar.DAY_OF_YEAR, -1);
+//                    day = calendar.getTime();
+//                    formattedDate = dateFormat.format(day);
                 }
             }while (response.statusCode() == 404);
             if(response.statusCode() == 400){

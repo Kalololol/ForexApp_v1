@@ -33,9 +33,7 @@ public class TransacService {
         Transac transac = calculateTransaction.manualCalculate(transacDTO.getValueCurrency(), transacDTO.getCodeCurrency(), (transacDTO.getDateTransaction().toString()).substring(0,10));
         transacRepository.createOrUpdate(transac);
 
-        TransacDTO result = new TransacDTO(transac.getDateTransaction().toString(), transac.getCodeCurrency(), transac.getValueCurrency(), transac.getId(), transac.getValuePln(), transac.getResultTransaction(), transac.getIsDone());
-
-        return result;
+        return new TransacDTO(transac.getDateTransaction().toString(), transac.getCodeCurrency(), transac.getValueCurrency(), transac.getId(), transac.getValuePln(), transac.getResultTransaction(), transac.getIsDone());
     }
     public List<TransacDTO> addManyTransactions(List<TransacDTO> transacDTOList){
         List<TransacDTO> resultTransacList = new ArrayList<>();

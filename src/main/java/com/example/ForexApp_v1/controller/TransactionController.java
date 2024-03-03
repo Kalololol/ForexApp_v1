@@ -30,6 +30,9 @@ public class TransactionController {
         try {
             model.addAttribute("transacDTO", new TransacDTO());
             return "singleTransaction";
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "singleTransaction";
         }catch (Exception e){
             e.printStackTrace();
             return "singleTransaction";
@@ -48,9 +51,11 @@ public class TransactionController {
       }catch (ConstraintViolationException cve){
             cve.printStackTrace();
             return "singleTransaction";
-        }
-        catch (Exception e){
-          e.printStackTrace();
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "singleTransaction";
+        }catch (Exception e){
+            e.printStackTrace();
             return "singleTransaction";
         }
     }
@@ -61,7 +66,11 @@ public class TransactionController {
             model.addAttribute("transacDTOList", transacDTOList);
             model.addAttribute("newTransacDTO", new TransacDTO());
             return "manyTransactions";
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "manyTransactions";
         }catch (Exception e){
+            e.printStackTrace();
             return "manyTransactions";
         }
     }
@@ -74,6 +83,9 @@ public class TransactionController {
         try {
             transacDTOList.add(transacDTO);
             return "redirect:/manyTransactions";
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+            return "manyTransactions";
         }catch (Exception e){
             e.printStackTrace();
             return "manyTransactions";
@@ -87,6 +99,12 @@ public class TransactionController {
             transacDTOList.clear();
             model.addAttribute("resultTransacList", resultTransacList);
             return "showResultTransactions";
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "calculateTransactions";
+        }catch (ConstraintViolationException cve) {
+            cve.printStackTrace();
+            return "calculateTransactions";
         }catch (Exception e){
             e.printStackTrace();
             return "calculateTransactions";
