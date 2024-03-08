@@ -52,12 +52,6 @@ public class CurrencyDownloadApi {
                 if(response.statusCode() == 404){
                     LocalDate dateMinus = day.minusDays(1);
                     formattedDate = dateFormat.format(dateMinus);
-//
-//                    Calendar calendar = Calendar.getInstance();
-//                    calendar.setTime(day);
-//                    calendar.add(Calendar.DAY_OF_YEAR, -1);
-//                    day = calendar.getTime();
-//                    formattedDate = dateFormat.format(day);
                 }
             }while (response.statusCode() == 404);
             if(response.statusCode() == 400){
