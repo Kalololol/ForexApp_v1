@@ -26,8 +26,7 @@
 <!--    -->
     <div class="mb-3">
         <label for="dateTransaction" class="form-label">Data</label>
-        <input type="date" class="form-control" id="dateTransaction" th:field="*{dateTransaction}"  th:errorclass="is-invalid" required>
-<!--        <td th:if="${#fields.hasErrors('dateTransaction')}" th:errors="*{dateTransaction}">dateTransaction Error</td>-->
+        <input type="date" class="form-control" min="2022-12-31" th:max="${day}" id="dateTransaction" th:field="*{dateTransaction}"  th:errorclass="is-invalid" required>
     </div>
 
     <label for="codeCurrency">Waluta:</label>

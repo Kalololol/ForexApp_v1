@@ -20,7 +20,7 @@
 <form th:action="@{/addTransactions}" th:object="${newTransacDTO}" method="post">
     <table>
             <td>
-                <input type="date" step="=1" id="dateTransaction" th:field="*{dateTransaction}" required><br><br>
+                <input type="date" step="=1" id="dateTransaction" min="2022-12-31" th:max="${day}" th:field="*{dateTransaction}" required><br><br>
             </td>
             <td>
                 <label for="codeCurrency">Waluta:</label>

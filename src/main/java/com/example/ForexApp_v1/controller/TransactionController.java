@@ -12,30 +12,36 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
-@Validated
 public class TransactionController {
     private final TransacService transacService;
     private List<TransacDTO> transacDTOList = new ArrayList<>();
     public TransactionController(TransacService transacService) {
         this.transacService = transacService;
     }
+    private LocalDate day = ((LocalDate.now()).minusDays(1));
     @GetMapping("/singleTransaction")
     public String showToSingleTransaction(Model model) {
         try {
+            model.addAttribute("day", day);
             model.addAttribute("transacDTO", new TransacDTO());
+//            return new ModelAndView("singleTransaction", model.asMap());
             return "singleTransaction";
         }catch (NullPointerException npe) {
             npe.printStackTrace();
+//            return new ModelAndView("singleTransaction", model.asMap());
             return "singleTransaction";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "singleTransaction";
+
         }
     }
 
@@ -54,23 +60,18 @@ public class TransactionController {
         }catch (NullPointerException npe) {
             npe.printStackTrace();
             return "singleTransaction";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "singleTransaction";
         }
     }
 
     @GetMapping("/manyTransactions")
     public String addToManyTransactions(final Model model){
         try {
+            model.addAttribute("day", day);
             model.addAttribute("transacDTOList", transacDTOList);
             model.addAttribute("newTransacDTO", new TransacDTO());
             return "manyTransactions";
         }catch (NullPointerException npe) {
             npe.printStackTrace();
-            return "manyTransactions";
-        }catch (Exception e){
-            e.printStackTrace();
             return "manyTransactions";
         }
     }
@@ -85,9 +86,6 @@ public class TransactionController {
             return "redirect:/manyTransactions";
         }catch (NullPointerException npe){
             npe.printStackTrace();
-            return "manyTransactions";
-        }catch (Exception e){
-            e.printStackTrace();
             return "manyTransactions";
         }
     }
@@ -104,9 +102,6 @@ public class TransactionController {
             return "calculateTransactions";
         }catch (ConstraintViolationException cve) {
             cve.printStackTrace();
-            return "calculateTransactions";
-        }catch (Exception e){
-            e.printStackTrace();
             return "calculateTransactions";
         }
     }
