@@ -11,21 +11,21 @@ public class Transac {
     private long id;
     private LocalDate dateTransaction;
     private String codeCurrency;
-    private double valueCurrency;
-    private double valuePln;
-    private double resultTransaction;
+    private Double valueCurrency;
+    private Double valuePln;
+    private Double resultTransaction;
     private boolean isDone;
     //private long idTransacGroup;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     public Transac(){};
-    public Transac(LocalDate dateTransaction, String codeCurrency, double valueCurrency) {
+    public Transac(LocalDate dateTransaction, String codeCurrency, Double valueCurrency) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
     }
-    public Transac(LocalDate dateTransaction, String codeCurrency, double valueCurrency, double valuePln, double resultTransaction, boolean isDone) {
+    public Transac(LocalDate dateTransaction, String codeCurrency, Double valueCurrency, Double valuePln, Double resultTransaction, boolean isDone) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
@@ -34,7 +34,7 @@ public class Transac {
         this.isDone = isDone;
     }
 
-    public Transac(long id, LocalDate dateTransaction, String codeCurrency, double valueCurrency, double valuePln, double resultTransaction, boolean isDone) {
+    public Transac(long id, LocalDate dateTransaction, String codeCurrency, Double valueCurrency, Double valuePln, Double resultTransaction, boolean isDone) {
         this.id = id;
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
@@ -44,7 +44,7 @@ public class Transac {
         this.isDone = isDone;
     }
 
-    public void setResultTransaction(double resultTransaction) {
+    public void setResultTransaction(Double resultTransaction) {
         this.resultTransaction = resultTransaction;
     }
     public LocalDate getDateTransaction() {
@@ -53,16 +53,16 @@ public class Transac {
     public String getCodeCurrency() {
         return codeCurrency;
     }
-    public double getValueCurrency() {
+    public Double getValueCurrency() {
         return valueCurrency;
     }
-    public double getValuePln() {
+    public Double getValuePln() {
         return valuePln;
     }
-    public double getResultTransaction() {
+    public Double getResultTransaction() {
         return resultTransaction;
     }
-    public void setValuePln(double valuePln) {
+    public void setValuePln(Double valuePln) {
         this.valuePln = valuePln;
     }
     public boolean getIsDone() {

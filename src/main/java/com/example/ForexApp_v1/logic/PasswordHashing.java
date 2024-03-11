@@ -11,7 +11,7 @@ public class PasswordHashing {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String hidePassword(String password){
+    public String hidePassword(String password){ // zmienić na hashPassword
         return passwordEncoder.encode(password);
     }
 

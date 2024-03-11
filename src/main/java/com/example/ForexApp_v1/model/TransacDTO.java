@@ -1,34 +1,48 @@
 package com.example.ForexApp_v1.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public class TransacDTO {
 
-//    @NotEmpty -- string ,
-//    NotBlank -- dla string, sprawdza że nie ma pustych znaków
-//    NotNull sprawdza czy pole nie jest nullem
-    @NotEmpty
+    @NotEmpty(message = "Należy wprowadzić datę")
     @JsonProperty("date")
     private String dateTransaction;
-    @NotEmpty
+    @NotBlank(message = "Kod waluty nie został wybrany")
     private String codeCurrency;
-    @NotEmpty
-    private double valueCurrency;
+    @NotNull(message = "Należy podać wartość transakcji")
+    @DecimalMin(value = "0.0001", message = "Minimalna wartość transacji to 0.0001")
+    private Double valueCurrency;
+    private long id;
+    private Double valuePln;
+    private Double resultTransaction;
+    private boolean isDone;
+
 
     public TransacDTO(){};
 
-    public TransacDTO(String dateTransaction, String codeCurrency, double valueCurrency) {
+    public TransacDTO(String dateTransaction, String codeCurrency, Double valueCurrency) {
         this.dateTransaction = dateTransaction;
         this.codeCurrency = codeCurrency;
         this.valueCurrency = valueCurrency;
+    }
+
+    public TransacDTO(String dateTransaction, String codeCurrency, Double valueCurrency, long id, Double valuePln, Double resultTransaction, boolean isDone) {
+        this.dateTransaction = dateTransaction;
+        this.codeCurrency = codeCurrency;
+        this.valueCurrency = valueCurrency;
+        this.id = id;
+        this.valuePln = valuePln;
+        this.resultTransaction = resultTransaction;
+        this.isDone = isDone;
+    }
+
+    public TransacDTO(String dateTransaction, String codeCurrency) {
+        this.dateTransaction = dateTransaction;
+        this.codeCurrency = codeCurrency;
     }
 
     public String getCodeCurrency() {
@@ -37,10 +51,10 @@ public class TransacDTO {
     public void setCodeCurrency(String codeCurrency) {
         this.codeCurrency = codeCurrency;
     }
-    public double getValueCurrency() {
+    public Double getValueCurrency() {
         return valueCurrency;
     }
-    public void setValueCurrency(double valueCurrency) {
+    public void setValueCurrency(Double valueCurrency) {
         this.valueCurrency = valueCurrency;
     }
     public String getDateTransaction() {
@@ -50,4 +64,28 @@ public class TransacDTO {
         this.dateTransaction = dateTransaction;
     }
 
+    @Override
+    public String toString() {
+        return "TransacDTO{" +
+                "dateTransaction='" + dateTransaction + '\'' +
+                ", codeCurrency='" + codeCurrency + '\'' +
+                ", valueCurrency=" + valueCurrency +
+                '}';
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Double getValuePln() {
+        return valuePln;
+    }
+
+    public Double getResultTransaction() {
+        return resultTransaction;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
 }

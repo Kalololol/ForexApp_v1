@@ -4,15 +4,23 @@ import com.example.ForexApp_v1.model.Transac;
 import com.example.ForexApp_v1.model.TransacDTO;
 import com.example.ForexApp_v1.model.UploadedFile;
 import com.example.ForexApp_v1.service.TransacService;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 @Controller
 public class TransactionController {
@@ -21,60 +29,80 @@ public class TransactionController {
     public TransactionController(TransacService transacService) {
         this.transacService = transacService;
     }
-
-    //adnotacja aby sprawdzać czy dane nie są puste bądź nullem ---np noEmpty
+    private LocalDate day = ((LocalDate.now()).minusDays(1));
     @GetMapping("/singleTransaction")
     public String showToSingleTransaction(Model model) {
         try {
+            model.addAttribute("day", day);
             model.addAttribute("transacDTO", new TransacDTO());
+//            return new ModelAndView("singleTransaction", model.asMap());
             return "singleTransaction";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "index"; // wstawić stronę że błąd
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+//            return new ModelAndView("singleTransaction", model.asMap());
+            return "singleTransaction";
+
         }
     }
+
     @PostMapping("/singleTransaction")
-    public String addToSingleTransaction(@ModelAttribute("transacDTO") TransacDTO transacDTO, Model model){
-      try {
-          Transac transac = transacService.addTransaction(transacDTO);
+        public String addToSingleTransaction(final @Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, final Model model, final BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "singleTransaction";
+        }
+        try {
+          TransacDTO transac = transacService.addTransaction(transacDTO);
           model.addAttribute("transac", transac);
           return "singleTransaction";
-      }catch (Exception e){
-          e.printStackTrace();
-          return "index";  // wstawić stronę że błąd
-      }
+      }catch (ConstraintViolationException cve){
+            cve.printStackTrace();
+            return "singleTransaction";
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "singleTransaction";
+        }
     }
+
     @GetMapping("/manyTransactions")
-    public String addToManyTransactions(Model model){
-
-        model.addAttribute("transacDTOList", transacDTOList);
-        model.addAttribute("newTransacDTO", new TransacDTO());
-
-        return "manyTransactions";
+    public String addToManyTransactions(final Model model){
+        try {
+            model.addAttribute("day", day);
+            model.addAttribute("transacDTOList", transacDTOList);
+            model.addAttribute("newTransacDTO", new TransacDTO());
+            return "manyTransactions";
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "manyTransactions";
+        }
     }
 
     @PostMapping("/addTransactions")
-    public String showCreateFormTransactions(@ModelAttribute TransacDTO transacDTO){
+    public String showCreateFormTransactions(final @ModelAttribute(name = "transacDTO") TransacDTO transacDTO, final BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "manyTransactions";
+        }
         try {
             transacDTOList.add(transacDTO);
-
             return "redirect:/manyTransactions";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "index";
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+            return "manyTransactions";
         }
     }
-    @PostMapping("/calculateTransactions")
-    public String showMultipleTransactions(Model model) {
-        try {
-            List<Transac> resultTransacList = transacService.addManyTransactions(transacDTOList);
-            transacDTOList.clear();
 
+    @PostMapping("/calculateTransactions")
+    public String showMultipleTransactions(final Model model) {
+        try {
+            List<TransacDTO> resultTransacList = transacService.addManyTransactions(transacDTOList);
+            transacDTOList.clear();
             model.addAttribute("resultTransacList", resultTransacList);
             return "showResultTransactions";
-        }catch (Exception e){
-            e.printStackTrace();
-            return "index";
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            return "calculateTransactions";
+        }catch (ConstraintViolationException cve) {
+            cve.printStackTrace();
+            return "calculateTransactions";
         }
     }
 

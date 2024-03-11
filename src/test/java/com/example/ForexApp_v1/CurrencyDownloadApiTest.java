@@ -4,6 +4,10 @@ import com.example.ForexApp_v1.api.CurrencyDownloadApi;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.format.DateTimeParseException;
+
+import static org.assertj.core.api.Fail.fail;
+
 public class CurrencyDownloadApiTest {
     private CurrencyDownloadApi currencyDownloadApi = new CurrencyDownloadApi();
 
@@ -23,7 +27,15 @@ public class CurrencyDownloadApiTest {
     public void getCurrencyExchangeRateCompareToWrongDateTest() {
         String result = currencyDownloadApi.getCurrencyExchangeRate("usd", "2023-11-120");
         Assertions.assertNull(result);
+
     }
+//    @Test
+//    public void getCurrencyExchangeRateCompareToWrongDateAssertThrowsTest() {
+////        String result = currencyDownloadApi.getCurrencyExchangeRate("usd", "2023-11-120");
+//        Assertions.assertThrows(DateTimeParseException.class, () -> {
+//            currencyDownloadApi.getCurrencyExchangeRate("usd", "20238-89-0");
+//        });
+//    }
     @Test
     public void getCurrencyExchangeRateCompareToWrongCodeTest() {
         String result = currencyDownloadApi.getCurrencyExchangeRate("usd123", "2023-11-10");
