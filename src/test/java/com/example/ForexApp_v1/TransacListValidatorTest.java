@@ -48,10 +48,7 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertTrue(result);
+        Assertions.assertTrue(transacListValidator.isValid(transacDTOList, context ));
     }
     @Test
     public void isValidValueCurrencyFalseTest(){
@@ -67,10 +64,7 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(transacListValidator.isValid(transacDTOList, context ));
     }
     @Test
     public void isValidValueCurrencyNullFalseTest(){
@@ -105,10 +99,7 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(transacListValidator.isValid(transacDTOList, context));
     }
     @Test
     public void isEmptyDateTransactionNullFalseTest(){
@@ -124,10 +115,7 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(transacListValidator.isValid(transacDTOList, context ));
     }
     @Test
     public void isValidCodeCurrencyNullFalseTest(){
@@ -143,10 +131,7 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(transacListValidator.isValid(transacDTOList, context ));
     }
     @Test
     public void isValidCodeCurrencyFalseTest(){
@@ -162,10 +147,7 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(transacListValidator.isValid(transacDTOList, context ));
     }
     @Test
     public void isValidNullListFalseTest(){
@@ -175,9 +157,6 @@ public class TransacListValidatorTest {
         transacDTOList.setTransacDTOList(listTransac);
 
         ConstraintValidatorContext context = Mockito.mock(ConstraintValidatorContext.class);
-
-        boolean result = transacListValidator.isValid(transacDTOList, context );
-
-        Assertions.assertFalse(result);
+        Assertions.assertFalse(transacListValidator.isValid(transacDTOList, context ));
     }
 }
