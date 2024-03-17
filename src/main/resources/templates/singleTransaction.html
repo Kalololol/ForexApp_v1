@@ -6,7 +6,6 @@
 
     <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/styles.css">
-
 </head>
 <body>
 <nav>
@@ -16,34 +15,19 @@
     <a href="/readerFile">Wczytaj plik</a>
 </nav>
 <form action="#" th:action="@{/singleTransaction}" th:object="${transacDTO}" method="post">
-
-<!--    <div class="form-outline mb-4">-->
-<!--        //                                        <input type="email" id="email" class="form-control" th:field="*{email}"-->
-<!--        //                                               placeholder="Email"-->
-<!--        //                                               th:errorclass="is-invalid"/>-->
-<!--        //                                        <label class="form-label" for="email">Adres email</label>-->
-<!--        //                                    </div>-->
-<!--    -->
     <div class="mb-3">
         <label for="dateTransaction" class="form-label">Data</label>
         <input type="date" class="form-control" min="2022-12-31" th:max="${day}" id="dateTransaction" th:field="*{dateTransaction}"  th:errorclass="is-invalid" required>
     </div>
-
     <label for="codeCurrency">Waluta:</label>
     <select id="codeCurrency" th:field="*{codeCurrency}" required>
         <option value="USD">USD</option>
         <option value="EUR">EUR</option>
     </select><br>
-<!--    <td th:if="${#fields.hasErrors('codeCurrency')}" th:errors="*{codeCurrency}">codeCurrency Error</td>-->
-
     <label for="valueCurrency">Wartość transakcji:</label>
     <input type="number" step="0.0001" min="0.0001" id="valueCurrency" th:field="*{valueCurrency}"  th:errorclass="is-invalid" required><br>
-<!--    <td th:if="${#fields.hasErrors('valueCurrency')}" th:errors="*{valueCurrency}">valueCurrency Error</td>-->
-
-
     <button type="submit">Zatwierdź</button>
 </form>
-    <a></a>
     <div th:if="${transac!= NULL}">
         <table>
             <tr>
@@ -71,12 +55,14 @@
                 <td th:text="${transac.getResultTransaction()}"></td>
             </tr>
         </table>
+    </div>
     <div th:if="${transac == NULL}">
     <button onclick="history.back()">Go back</button>
     </div>
     <div th:if="${transac != NULL}">
         <button><a th:href="@{/}">Go back</a></button>
     </div>
-
 </body>
 </html>
+
+

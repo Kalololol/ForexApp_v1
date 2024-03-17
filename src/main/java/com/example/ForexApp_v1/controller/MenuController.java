@@ -1,13 +1,6 @@
 package com.example.ForexApp_v1.controller;
 
-import com.example.ForexApp_v1.model.User;
-import com.example.ForexApp_v1.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import javax.validation.Valid;
 
 
 @Controller

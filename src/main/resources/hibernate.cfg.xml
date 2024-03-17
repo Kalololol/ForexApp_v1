@@ -17,7 +17,7 @@
         -->
 <!--        <property name="hibernate.hbm2ddl.auto">none</property>-->
         <mapping class="com.example.ForexApp_v1.model.Transac"/>
-        <mapping class="com.example.ForexApp_v1.model.User"/>
+        <mapping class="com.example.ForexApp_v1.model.CustomUser"/>
         <mapping class="com.example.ForexApp_v1.model.Currency"/>
 
 

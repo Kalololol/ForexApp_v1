@@ -1,7 +1,6 @@
 package com.example.ForexApp_v1.repositories;
 
-import com.example.ForexApp_v1.model.Transac;
-import com.example.ForexApp_v1.model.TransacDTO;
+import com.example.ForexApp_v1.model.Currency;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -12,19 +11,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class TransacRepository implements IRepository<Transac>{
+public class CurrencyDAO implements IRepository<Currency> {
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
 
-    public TransacRepository() {
+    public CurrencyDAO() {
     }
 
     @Override
-    public void createOrUpdate(Transac transac) {
+    public void createOrUpdate(Currency currency){
         Transaction transaction = null;
         try {
             Session session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.merge(transac);
+            session.merge(currency);
             transaction.commit();
             session.close();
         }catch (Exception e){
@@ -34,14 +33,28 @@ public class TransacRepository implements IRepository<Transac>{
             e.printStackTrace();
         }
     }
+    //    @Override
+//    public void edit(Currency currency) {
+//        Transaction transaction = null;
+//
+//        try {
+//            Session s = sessionFactory.openSession();
+//            Transaction t = s.beginTransaction();
+//            s.merge(currency);
+//            t.commit();
+//            s.close();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
     @Override
-    public void delete(Transac transac) {
+    public void delete(Currency currency){
         Transaction transaction = null;
 
         try {
             Session s = sessionFactory.openSession();
             Transaction t = s.beginTransaction();
-            s.remove(transac);
+            s.remove(currency);
             t.commit();
             s.close();
         }catch (Exception e){
@@ -50,21 +63,22 @@ public class TransacRepository implements IRepository<Transac>{
         }
     }
     @Override
-    public Transac findById(Long id) {
+    public List<Currency> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Transac> transacQuery = cb.createQuery(Transac.class);
-        Root<Transac> root = transacQuery.from(Transac.class);
-        transacQuery.select(root).where(cb.equal(root.get("id"), id));
-        return session.createQuery(transacQuery).getSingleResultOrNull();
+        CriteriaQuery<Currency> currencyQuery = cb.createQuery(Currency.class);
+        Root<Currency> root = currencyQuery.from(Currency.class);
+        currencyQuery.select(root);
+        return session.createQuery(currencyQuery).getResultList();
     }
+
     @Override
-    public List<Transac> findAll() {
+    public Currency findById(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Transac> transacQuery = cb.createQuery(Transac.class);
-        Root<Transac> root = transacQuery.from(Transac.class);
-        transacQuery.select(root);
-        return session.createQuery(transacQuery).getResultList();
+        CriteriaQuery<Currency> currencyQuery = cb.createQuery(Currency.class);
+        Root<Currency> root = currencyQuery.from(Currency.class);
+        currencyQuery.select(root).where(cb.equal(root.get("id"), id));
+        return session.createQuery(currencyQuery).getSingleResultOrNull();
     }
 }

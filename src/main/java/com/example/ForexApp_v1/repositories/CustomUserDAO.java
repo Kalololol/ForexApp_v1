@@ -1,27 +1,30 @@
 package com.example.ForexApp_v1.repositories;
 
-import com.example.ForexApp_v1.model.User;
+import com.example.ForexApp_v1.model.CustomUser;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class UserRepository implements IRepository<User>{
+public class CustomUserDAO {
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
-    public UserRepository(){}
-    @Override
-    public void createOrUpdate(User user) {
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public CustomUserDAO(){}
+    public void createUser(CustomUser customUser) {
         Transaction t = null;
         try {
             Session session = sessionFactory.openSession();
             t = session.beginTransaction();
-            session.merge(user);
+            customUser.setPassword(passwordEncoder.encode(customUser.getPassword()));
+            session.merge(customUser);
             t.commit();
             session.close();
         }catch (Exception e){
@@ -31,7 +34,7 @@ public class UserRepository implements IRepository<User>{
             e.printStackTrace();
         }
     }
-//    @Override
+    //    @Override
 //    public void edit(User user) {
 //        try {
 //            Session s = sessionFactory.openSession();
@@ -43,14 +46,13 @@ public class UserRepository implements IRepository<User>{
 //            e.printStackTrace();
 //        }
 //    }
-    @Override
-    public void delete(User user) {
+    public void delete(CustomUser customUser) {
         Transaction transaction = null;
 
         try {
             Session s = sessionFactory.openSession();
             Transaction t = s.beginTransaction();
-            s.remove(user);
+            s.remove(customUser);
             t.commit();
             s.close();
         }catch (Exception e){
@@ -58,28 +60,26 @@ public class UserRepository implements IRepository<User>{
 
         }
     }
-    @Override
-    public User findById(Long id) {
+    public CustomUser findById(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
-        Root<User> root = userQuery.from(User.class);
+        CriteriaQuery<CustomUser> userQuery = cb.createQuery(CustomUser.class);
+        Root<CustomUser> root = userQuery.from(CustomUser.class);
         userQuery.select(root).where(cb.equal(root.get("id"), id));
         return session.createQuery(userQuery).getSingleResultOrNull();
     }
-    public User findUserByEmail(String email) {
+    public CustomUser findUserByEmail(String email) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
-        Root<User> root = userQuery.from(User.class);
+        CriteriaQuery<CustomUser> userQuery = cb.createQuery(CustomUser.class);
+        Root<CustomUser> root = userQuery.from(CustomUser.class);
         userQuery.select(root).where(cb.equal(root.get("email"), email));
         return session.createQuery(userQuery).getSingleResultOrNull();    }
-    @Override
-    public List<User> findAll() {
+    public List<CustomUser> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
-        Root<User> root = userQuery.from(User.class);
+        CriteriaQuery<CustomUser> userQuery = cb.createQuery(CustomUser.class);
+        Root<CustomUser> root = userQuery.from(CustomUser.class);
         userQuery.select(root);
         return session.createQuery(userQuery).getResultList();
     }
