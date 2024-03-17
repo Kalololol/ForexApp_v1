@@ -5,25 +5,22 @@ import com.example.ForexApp_v1.logic.CalculateTransaction;
 import com.example.ForexApp_v1.logic.JsonMapper;
 import com.example.ForexApp_v1.model.Transac;
 import com.example.ForexApp_v1.model.TransacDTO;
-import com.example.ForexApp_v1.repositories.CurrencyRepository;
-import com.example.ForexApp_v1.repositories.TransacRepository;
+import com.example.ForexApp_v1.repositories.TransacDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TransacService {
-    private final TransacRepository transacRepository;
+    private final TransacDAO transacDAO;
     private final CurrencyDownloadApi currencyDownloadApi;
     private final CalculateTransaction calculateTransaction;
     private final JsonMapper jsonMapper;
     @Autowired
-    public TransacService(TransacRepository transacRepository, CurrencyDownloadApi currencyDownloadApi, CalculateTransaction calculateTransaction, JsonMapper jsonMapper) {
-        this.transacRepository = transacRepository;
+    public TransacService(TransacDAO transacDAO, CurrencyDownloadApi currencyDownloadApi, CalculateTransaction calculateTransaction, JsonMapper jsonMapper) {
+        this.transacDAO = transacDAO;
         this.currencyDownloadApi = currencyDownloadApi;
         this.calculateTransaction = calculateTransaction;
         this.jsonMapper = jsonMapper;
@@ -31,7 +28,7 @@ public class TransacService {
 
     public TransacDTO addTransaction(TransacDTO transacDTO){
         Transac transac = calculateTransaction.manualCalculate(transacDTO.getValueCurrency(), transacDTO.getCodeCurrency(), (transacDTO.getDateTransaction().toString()).substring(0,10));
-        transacRepository.createOrUpdate(transac);
+        transacDAO.createOrUpdate(transac);
 
         return new TransacDTO(transac.getDateTransaction().toString(), transac.getCodeCurrency(), transac.getValueCurrency(), transac.getId(), transac.getValuePln(), transac.getResultTransaction(), transac.getIsDone());
     }
@@ -43,16 +40,16 @@ public class TransacService {
         return resultTransacList;
     }
     public List<Transac> showAllTransaction(){
-        return transacRepository.findAll();
+        return transacDAO.findAll();
     }
     public Transac findTransaction(Long id){
-        return transacRepository.findById(id);
+        return transacDAO.findById(id);
     }
     public void createOrUpdateTransaction(Transac transac){
-        transacRepository.createOrUpdate(transac);
+        transacDAO.createOrUpdate(transac);
     }
     public void deleteTransaction(Transac transac){
-        transacRepository.delete(transac);
+        transacDAO.delete(transac);
     }
 
 }

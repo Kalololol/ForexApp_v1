@@ -8,29 +8,29 @@ import jakarta.persistence.Table;
 
 @Table(name = "customUser")
 @Entity
-public class User {
+public class CustomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String lastName;
     private String email;
-    private String passwordHash;
+    private String password;
 
-    public User(){};
-    public User(String name, String lastName, String email, String passwordHash) {
+    public CustomUser(){};
+    public CustomUser(String name, String lastName, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.password = password;
     }
 
-    public User(Long id, String name, String lastName, String email, String passwordHash) {
+    public CustomUser(Long id, String name, String lastName, String email, String password) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.password = password;
     }
     public Long getId() {
         return id;
@@ -64,11 +64,11 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String passwordHash) {
+        this.password = passwordHash;
     }
 }
