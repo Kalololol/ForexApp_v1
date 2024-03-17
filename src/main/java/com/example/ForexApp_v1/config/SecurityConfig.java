@@ -1,5 +1,6 @@
 package com.example.ForexApp_v1.config;
 
+import com.example.ForexApp_v1.model.CustomUser;
 import com.example.ForexApp_v1.service.CustomUserSecurityService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -33,9 +35,32 @@ public class SecurityConfig {
                         .usernameParameter("email")
                         .defaultSuccessUrl("/")
                         .failureUrl("/login?error=true")
-                        .permitAll());
+                        .permitAll()
+                        .successHandler((request, response, authentication) -> {
+                            // Pobierz szczegóły zalogowanego użytkownika
+                            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                            Long userId = getIdFromUserDetails(userDetails);
+                            request.setAttribute("userId", userId);
+//request.getSession().setAttribute("userId", userId);
+                            // Przekieruj na inną stronę po zalogowaniu
+//                            response.sendRedirect("/dashboard");
+                        }));
+
+
+        //// W metodzie successHandler
+        //request.getSession().setAttribute("userId", userId);
+        //
+        //// W innych metodach
+        //Long userId = (Long) request.getSession().getAttribute("userId");
 
         return security.build();
+    }
+
+    private Long getIdFromUserDetails(UserDetails userDetails) {
+        if (userDetails instanceof CustomUser) {
+            return ((CustomUser) userDetails).getId();
+        }
+        return null;
     }
 
     @Bean

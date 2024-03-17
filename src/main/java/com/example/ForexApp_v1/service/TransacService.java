@@ -14,17 +14,10 @@ import java.util.List;
 
 @Service
 public class TransacService {
-    private final TransacDAO transacDAO;
-    private final CurrencyDownloadApi currencyDownloadApi;
-    private final CalculateTransaction calculateTransaction;
-    private final JsonMapper jsonMapper;
-    @Autowired
-    public TransacService(TransacDAO transacDAO, CurrencyDownloadApi currencyDownloadApi, CalculateTransaction calculateTransaction, JsonMapper jsonMapper) {
-        this.transacDAO = transacDAO;
-        this.currencyDownloadApi = currencyDownloadApi;
-        this.calculateTransaction = calculateTransaction;
-        this.jsonMapper = jsonMapper;
-    }
+    private final TransacDAO transacDAO = new TransacDAO();
+    private final CurrencyDownloadApi currencyDownloadApi = new CurrencyDownloadApi();
+    private final CalculateTransaction calculateTransaction = new CalculateTransaction();
+    private final JsonMapper jsonMapper = new JsonMapper();
 
     public TransacDTO addTransaction(TransacDTO transacDTO){
         Transac transac = calculateTransaction.manualCalculate(transacDTO.getValueCurrency(), transacDTO.getCodeCurrency(), (transacDTO.getDateTransaction().toString()).substring(0,10));

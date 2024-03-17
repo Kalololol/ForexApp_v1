@@ -1,8 +1,10 @@
 package com.example.ForexApp_v1.controller;
 
+import com.example.ForexApp_v1.model.CustomUser;
 import com.example.ForexApp_v1.model.Transac;
 import com.example.ForexApp_v1.model.TransacDTO;
 import com.example.ForexApp_v1.model.UploadedFile;
+import com.example.ForexApp_v1.service.CustomUserService;
 import com.example.ForexApp_v1.service.TransacService;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.net.ssl.HandshakeCompletedEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,12 +27,13 @@ import java.util.Map;
 
 @Controller
 public class TransactionController {
-    private final TransacService transacService;
+    private final TransacService transacService = new TransacService();
     private List<TransacDTO> transacDTOList = new ArrayList<>();
-    public TransactionController(TransacService transacService) {
-        this.transacService = transacService;
-    }
+
     private LocalDate day = ((LocalDate.now()).minusDays(1));
+
+    private final CustomUserService customUserService = new CustomUserService();
+
     @GetMapping("/singleTransaction")
     public String showToSingleTransaction(Model model) {
         try {
