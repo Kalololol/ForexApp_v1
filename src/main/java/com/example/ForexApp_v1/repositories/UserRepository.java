@@ -1,30 +1,27 @@
 package com.example.ForexApp_v1.repositories;
 
-import com.example.ForexApp_v1.model.CustomUser;
+import com.example.ForexApp_v1.model.User;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class CustomUserDAO {
+public class UserRepository implements IRepository<User>{
     private final SessionFactory sessionFactory = ForexAppSessionFactory.getSessionFactory();
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    public CustomUserDAO(){}
-    public void createUser(CustomUser customUser) {
+    public UserRepository(){}
+    @Override
+    public void createOrUpdate(User user) {
         Transaction t = null;
         try {
             Session session = sessionFactory.openSession();
             t = session.beginTransaction();
-            customUser.setPassword(passwordEncoder.encode(customUser.getPassword()));
-            session.merge(customUser);
+            session.merge(user);
             t.commit();
             session.close();
         }catch (Exception e){
@@ -34,7 +31,7 @@ public class CustomUserDAO {
             e.printStackTrace();
         }
     }
-    //    @Override
+//    @Override
 //    public void edit(User user) {
 //        try {
 //            Session s = sessionFactory.openSession();
@@ -46,13 +43,14 @@ public class CustomUserDAO {
 //            e.printStackTrace();
 //        }
 //    }
-    public void delete(CustomUser customUser) {
+    @Override
+    public void delete(User user) {
         Transaction transaction = null;
 
         try {
             Session s = sessionFactory.openSession();
             Transaction t = s.beginTransaction();
-            s.remove(customUser);
+            s.remove(user);
             t.commit();
             s.close();
         }catch (Exception e){
@@ -60,26 +58,28 @@ public class CustomUserDAO {
 
         }
     }
-    public CustomUser findById(Long id) {
+    @Override
+    public User findById(Long id) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<CustomUser> userQuery = cb.createQuery(CustomUser.class);
-        Root<CustomUser> root = userQuery.from(CustomUser.class);
+        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
+        Root<User> root = userQuery.from(User.class);
         userQuery.select(root).where(cb.equal(root.get("id"), id));
         return session.createQuery(userQuery).getSingleResultOrNull();
     }
-    public CustomUser findUserByEmail(String email) {
+    public User findUserByEmail(String email) {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<CustomUser> userQuery = cb.createQuery(CustomUser.class);
-        Root<CustomUser> root = userQuery.from(CustomUser.class);
+        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
+        Root<User> root = userQuery.from(User.class);
         userQuery.select(root).where(cb.equal(root.get("email"), email));
         return session.createQuery(userQuery).getSingleResultOrNull();    }
-    public List<CustomUser> findAll() {
+    @Override
+    public List<User> findAll() {
         Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<CustomUser> userQuery = cb.createQuery(CustomUser.class);
-        Root<CustomUser> root = userQuery.from(CustomUser.class);
+        CriteriaQuery<User> userQuery = cb.createQuery(User.class);
+        Root<User> root = userQuery.from(User.class);
         userQuery.select(root);
         return session.createQuery(userQuery).getResultList();
     }

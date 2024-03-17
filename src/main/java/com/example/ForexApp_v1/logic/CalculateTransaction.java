@@ -4,6 +4,7 @@ import com.example.ForexApp_v1.api.CurrencyDownloadApi;
 import com.example.ForexApp_v1.model.Currency;
 import com.example.ForexApp_v1.model.Transac;
 import com.example.ForexApp_v1.model.TransacDTO;
+import com.example.ForexApp_v1.repositories.CurrencyRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

@@ -46,15 +46,15 @@ public class TransactionController {
     }
 
     @PostMapping("/singleTransaction")
-    public String addToSingleTransaction(final @Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, final Model model, final BindingResult bindingResult){
+        public String addToSingleTransaction(final @Valid @ModelAttribute("transacDTO") TransacDTO transacDTO, final Model model, final BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return "singleTransaction";
         }
         try {
-            TransacDTO transac = transacService.addTransaction(transacDTO);
-            model.addAttribute("transac", transac);
-            return "singleTransaction";
-        }catch (ConstraintViolationException cve){
+          TransacDTO transac = transacService.addTransaction(transacDTO);
+          model.addAttribute("transac", transac);
+          return "singleTransaction";
+      }catch (ConstraintViolationException cve){
             cve.printStackTrace();
             return "singleTransaction";
         }catch (NullPointerException npe) {

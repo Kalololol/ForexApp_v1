@@ -18,7 +18,7 @@ public class Transac {
     //private long idTransacGroup;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private CustomUser customUser;
+    private User user;
     public Transac(){};
     public Transac(LocalDate dateTransaction, String codeCurrency, Double valueCurrency) {
         this.dateTransaction = dateTransaction;

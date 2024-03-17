@@ -1,5 +1,7 @@
 package com.example.ForexApp_v1.repositories;
 
+import com.example.ForexApp_v1.model.User;
+
 import java.util.List;
 
 public interface IRepository<TEntity> {
