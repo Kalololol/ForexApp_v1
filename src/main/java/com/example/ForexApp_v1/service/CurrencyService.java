@@ -1,32 +1,30 @@
 package com.example.ForexApp_v1.service;
 
 import com.example.ForexApp_v1.model.Currency;
-import com.example.ForexApp_v1.repositories.CurrencyRepository;
-import lombok.RequiredArgsConstructor;
+import com.example.ForexApp_v1.repositories.CurrencyDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class CurrencyService {
-    private final CurrencyRepository currencyRepository;
+    private final CurrencyDAO currencyDAO;
     @Autowired
-    public CurrencyService(CurrencyRepository currencyRepository) {
-        this.currencyRepository = currencyRepository;
+    public CurrencyService(CurrencyDAO currencyDAO) {
+        this.currencyDAO = currencyDAO;
     }
 
     public List<Currency> findAllCurrency(){
-        return currencyRepository.findAll();
+        return currencyDAO.findAll();
     }
     public Currency findCurrency(Long id){
-        return currencyRepository.findById(id);
+        return currencyDAO.findById(id);
     }
     public void createOrUpdateCurrency(Currency currency){
-        currencyRepository.createOrUpdate(currency);
+        currencyDAO.createOrUpdate(currency);
     }
     public void deleteCurrency(Currency currency){
-        currencyRepository.delete(currency);
+        currencyDAO.delete(currency);
     }
 
 }
